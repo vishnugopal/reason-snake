@@ -34,8 +34,17 @@ type cell = {
   y: int,
 };
 
-let drawCell = (ctx, cell) => {
-  Canvas2d.setFillStyle(ctx, String, "#1179BF");
+type snake = list(cell);
+
+type food = cell;
+
+type world = {
+  snake,
+  food,
+};
+
+let drawCell = (ctx, fillColor, cell) => {
+  Canvas2d.setFillStyle(ctx, String, fillColor);
   Canvas2d.setStrokeStyle(ctx, String, "white");
   Canvas2d.fillRect(
     ~x=float(cell.x) *. 10.,
@@ -53,16 +62,15 @@ let drawCell = (ctx, cell) => {
   );
 };
 
-let snake = [
-  {x: 10, y: 10},
-  {x: 11, y: 10},
-  {x: 12, y: 10},
-  {x: 13, y: 10},
-];
+let drawSnakeCell = drawCell(ctx, "#1179BF");
 
-let drawSnake = (ctx, snake) => List.iter(drawCell(ctx), snake);
+let drawFoodCell = drawCell(ctx, "af2010");
 
-let renderSnake = drawSnake(ctx);
+let drawSnake = snake => List.iter(drawSnakeCell, snake);
+
+let drawFood = food => drawFoodCell(food);
+
+let moveSnake = snake => List.map(cell => {...cell, x: cell.x + 1}, snake);
 
 let clearCanvas = ctx =>
   ctx
@@ -73,10 +81,32 @@ let clearCanvas = ctx =>
        ~h=float_of_int(canvasHeight),
      );
 
-let renderScene = ctx => {
+let initialSnake = [
+  {x: 10, y: 10},
+  {x: 11, y: 10},
+  {x: 12, y: 10},
+  {x: 13, y: 10},
+];
+
+let initialFood = {x: 30, y: 20};
+
+let initialWorld = {snake: initialSnake, food: initialFood};
+
+let state = ref(initialWorld);
+
+let renderWorld = (ctx, state) => {
   clearCanvas(ctx);
-  renderSnake(snake);
+  drawSnake(state.snake);
+  drawFood(state.food);
   Js.log("drawing");
 };
 
-Js.Global.setInterval(() => renderScene(ctx), 300);
+Js.Global.setInterval(
+  () => {
+    let oldWorld = state^;
+    let newWorld = {snake: moveSnake(oldWorld.snake), food: oldWorld.food};
+    state := newWorld;
+    renderWorld(ctx, newWorld);
+  },
+  300,
+);

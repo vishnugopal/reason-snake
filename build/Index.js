@@ -1228,15 +1228,43 @@ var canvasHeight = unsafelyUnwrapOption(map((function (prim) {
             return prim.offsetHeight;
           }), ElementRe.asHtmlElement(canvasEl)));
 
-function drawCell(ctx, cell) {
-  Canvas2dRe.setFillStyle(ctx, /* String */0, "#1179BF");
+function drawCell(ctx, fillColor, cell) {
+  Canvas2dRe.setFillStyle(ctx, /* String */0, fillColor);
   Canvas2dRe.setStrokeStyle(ctx, /* String */0, "white");
   ctx.fillRect(cell[/* x */0] * 10, cell[/* y */1] * 10, 10, 10);
   ctx.strokeRect(cell[/* x */0] * 10, cell[/* y */1] * 10, 10, 10);
   return /* () */0;
 }
 
-var snake = /* :: */[
+function drawSnakeCell(param) {
+  return drawCell(ctx, "#1179BF", param);
+}
+
+function drawFoodCell(param) {
+  return drawCell(ctx, "af2010", param);
+}
+
+function drawSnake(snake) {
+  return List.iter(drawSnakeCell, snake);
+}
+
+var drawFood = drawFoodCell;
+
+function moveSnake(snake) {
+  return List.map((function (cell) {
+                return /* record */[
+                        /* x */cell[/* x */0] + 1 | 0,
+                        /* y */cell[/* y */1]
+                      ];
+              }), snake);
+}
+
+function clearCanvas(ctx) {
+  ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+  return /* () */0;
+}
+
+var initialSnake = /* :: */[
   /* record */[
     /* x */10,
     /* y */10
@@ -1262,32 +1290,36 @@ var snake = /* :: */[
   ]
 ];
 
-function drawSnake(ctx, snake) {
-  return List.iter((function (param) {
-                return drawCell(ctx, param);
-              }), snake);
-}
+var initialFood = /* record */[
+  /* x */30,
+  /* y */20
+];
 
-function renderSnake(param) {
-  return List.iter((function (param) {
-                return drawCell(ctx, param);
-              }), param);
-}
+var initialWorld = /* record */[
+  /* snake */initialSnake,
+  /* food */initialFood
+];
 
-function clearCanvas(ctx) {
-  ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-  return /* () */0;
-}
+var state = [initialWorld];
 
-function renderScene(ctx) {
+function renderWorld(ctx, state) {
   clearCanvas(ctx);
-  renderSnake(snake);
+  List.iter(drawSnakeCell, state[/* snake */0]);
+  drawFoodCell(state[/* food */1]);
   console.log("drawing");
   return /* () */0;
 }
 
 setInterval((function () {
-        return renderScene(ctx);
+        var oldWorld = state[0];
+        var newWorld_000 = /* snake */moveSnake(oldWorld[/* snake */0]);
+        var newWorld_001 = /* food */oldWorld[/* food */1];
+        var newWorld = /* record */[
+          newWorld_000,
+          newWorld_001
+        ];
+        state[0] = newWorld;
+        return renderWorld(ctx, newWorld);
       }), 300);
 
 exports.map = map;
@@ -1297,11 +1329,17 @@ exports.ctx = ctx;
 exports.canvasWidth = canvasWidth;
 exports.canvasHeight = canvasHeight;
 exports.drawCell = drawCell;
-exports.snake = snake;
+exports.drawSnakeCell = drawSnakeCell;
+exports.drawFoodCell = drawFoodCell;
 exports.drawSnake = drawSnake;
-exports.renderSnake = renderSnake;
+exports.drawFood = drawFood;
+exports.moveSnake = moveSnake;
 exports.clearCanvas = clearCanvas;
-exports.renderScene = renderScene;
+exports.initialSnake = initialSnake;
+exports.initialFood = initialFood;
+exports.initialWorld = initialWorld;
+exports.state = state;
+exports.renderWorld = renderWorld;
 /* canvasEl Not a pure module */
 
 
