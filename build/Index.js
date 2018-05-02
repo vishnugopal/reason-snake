@@ -1194,6 +1194,7 @@ var List = __webpack_require__(28);
 var Curry = __webpack_require__(1);
 var ElementRe = __webpack_require__(7);
 var Canvas2dRe = __webpack_require__(13);
+var DocumentRe = __webpack_require__(45);
 var Js_primitive = __webpack_require__(4);
 var Caml_builtin_exceptions = __webpack_require__(0);
 
@@ -1228,6 +1229,23 @@ var canvasHeight = unsafelyUnwrapOption(map((function (prim) {
             return prim.offsetHeight;
           }), ElementRe.asHtmlElement(canvasEl)));
 
+function andThen(f, param) {
+  if (param) {
+    return Curry._1(f, param[0]);
+  } else {
+    return /* None */0;
+  }
+}
+
+var documentEventTarget = unsafelyUnwrapOption(andThen((function (prim) {
+            return Js_primitive.null_undefined_to_opt(prim.body);
+          }), DocumentRe.asHtmlDocument(document)));
+
+function clearCanvas(ctx) {
+  ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+  return /* () */0;
+}
+
 function drawCell(ctx, fillColor, cell) {
   Canvas2dRe.setFillStyle(ctx, /* String */0, fillColor);
   Canvas2dRe.setStrokeStyle(ctx, /* String */0, "white");
@@ -1241,7 +1259,7 @@ function drawSnakeCell(param) {
 }
 
 function drawFoodCell(param) {
-  return drawCell(ctx, "af2010", param);
+  return drawCell(ctx, "#af2010", param);
 }
 
 function drawSnake(snake) {
@@ -1257,11 +1275,6 @@ function moveSnake(snake) {
                         /* y */cell[/* y */1]
                       ];
               }), snake);
-}
-
-function clearCanvas(ctx) {
-  ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-  return /* () */0;
 }
 
 var initialSnake = /* :: */[
@@ -1297,30 +1310,77 @@ var initialFood = /* record */[
 
 var initialWorld = /* record */[
   /* snake */initialSnake,
-  /* food */initialFood
+  /* food */initialFood,
+  /* direction : Right */1
 ];
 
 var state = [initialWorld];
 
-function renderWorld(ctx, state) {
+function drawWorld(ctx, state) {
   clearCanvas(ctx);
   List.iter(drawSnakeCell, state[/* snake */0]);
-  drawFoodCell(state[/* food */1]);
-  console.log("drawing");
+  return drawFoodCell(state[/* food */1]);
+}
+
+function getKey(evt) {
+  var match = evt.key;
+  switch (match) {
+    case "ArrowRight" : 
+        return /* ArrowRight */1;
+    case "ArrowUp" : 
+        return /* ArrowUp */0;
+    default:
+      return /* Ignored */2;
+  }
+}
+
+function handleTick() {
+  var oldWorld = state[0];
+  var newWorld_000 = /* snake */moveSnake(oldWorld[/* snake */0]);
+  var newWorld_001 = /* food */oldWorld[/* food */1];
+  var newWorld_002 = /* direction */oldWorld[/* direction */2];
+  var newWorld = /* record */[
+    newWorld_000,
+    newWorld_001,
+    newWorld_002
+  ];
+  state[0] = newWorld;
+  console.log(state[0][/* direction */2]);
+  return drawWorld(ctx, newWorld);
+}
+
+setInterval(handleTick, 300);
+
+function handleEvent(evt) {
+  var oldWorld = state[0];
+  var match = getKey(evt);
+  var tmp;
+  switch (match) {
+    case 0 : 
+        tmp = /* Up */0;
+        break;
+    case 1 : 
+        tmp = /* Right */1;
+        break;
+    case 2 : 
+        tmp = oldWorld[/* direction */2];
+        break;
+    
+  }
+  var newWorld_000 = /* snake */oldWorld[/* snake */0];
+  var newWorld_001 = /* food */oldWorld[/* food */1];
+  var newWorld = /* record */[
+    newWorld_000,
+    newWorld_001,
+    /* direction */tmp
+  ];
+  state[0] = newWorld;
   return /* () */0;
 }
 
-setInterval((function () {
-        var oldWorld = state[0];
-        var newWorld_000 = /* snake */moveSnake(oldWorld[/* snake */0]);
-        var newWorld_001 = /* food */oldWorld[/* food */1];
-        var newWorld = /* record */[
-          newWorld_000,
-          newWorld_001
-        ];
-        state[0] = newWorld;
-        return renderWorld(ctx, newWorld);
-      }), 300);
+documentEventTarget.addEventListener("keydown", handleEvent);
+
+var initialDirection = /* Right */1;
 
 exports.map = map;
 exports.unsafelyUnwrapOption = unsafelyUnwrapOption;
@@ -1328,18 +1388,24 @@ exports.canvasEl = canvasEl;
 exports.ctx = ctx;
 exports.canvasWidth = canvasWidth;
 exports.canvasHeight = canvasHeight;
+exports.andThen = andThen;
+exports.documentEventTarget = documentEventTarget;
+exports.clearCanvas = clearCanvas;
 exports.drawCell = drawCell;
 exports.drawSnakeCell = drawSnakeCell;
 exports.drawFoodCell = drawFoodCell;
 exports.drawSnake = drawSnake;
 exports.drawFood = drawFood;
 exports.moveSnake = moveSnake;
-exports.clearCanvas = clearCanvas;
 exports.initialSnake = initialSnake;
 exports.initialFood = initialFood;
+exports.initialDirection = initialDirection;
 exports.initialWorld = initialWorld;
 exports.state = state;
-exports.renderWorld = renderWorld;
+exports.drawWorld = drawWorld;
+exports.getKey = getKey;
+exports.handleTick = handleTick;
+exports.handleEvent = handleEvent;
 /* canvasEl Not a pure module */
 
 
@@ -7114,6 +7180,143 @@ function concat_fmt(fmt1, fmt2) {
 exports.concat_fmtty = concat_fmtty;
 exports.erase_rel = erase_rel;
 exports.concat_fmt = concat_fmt;
+/* No side effect */
+
+
+/***/ }),
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Curry = __webpack_require__(1);
+var NodeRe = __webpack_require__(8);
+var DomTypesRe = __webpack_require__(2);
+var Js_primitive = __webpack_require__(4);
+var ParentNodeRe = __webpack_require__(11);
+var EventTargetRe = __webpack_require__(3);
+var DocumentOrShadowRootRe = __webpack_require__(46);
+var NonElementParentNodeRe = __webpack_require__(47);
+
+function Impl() {
+  var asHtmlDocument = (
+    function (document) {
+      return document.doctype.name === "html" ?  document : null;
+    }
+  );
+  var asHtmlDocument$1 = function (self) {
+    return Js_primitive.null_to_opt(Curry._1(asHtmlDocument, self));
+  };
+  var ofNode = function (node) {
+    var match = +(NodeRe.nodeType(node) === /* Document */8);
+    if (match !== 0) {
+      return /* Some */[node];
+    } else {
+      return /* None */0;
+    }
+  };
+  var compatMode = function (self) {
+    return DomTypesRe.decodeCompatMode(self.compatMode);
+  };
+  var visibilityState = function (self) {
+    return DomTypesRe.decodeVisibilityState(self.visibilityState);
+  };
+  return /* module */[
+          /* asHtmlDocument */asHtmlDocument$1,
+          /* ofNode */ofNode,
+          /* compatMode */compatMode,
+          /* visibilityState */visibilityState
+        ];
+}
+
+var include = NodeRe.Impl(/* module */[]);
+
+EventTargetRe.Impl(/* module */[]);
+
+NonElementParentNodeRe.Impl(/* module */[]);
+
+DocumentOrShadowRootRe.Impl(/* module */[]);
+
+ParentNodeRe.Impl(/* module */[]);
+
+var asHtmlDocument = (
+    function (document) {
+      return document.doctype.name === "html" ?  document : null;
+    }
+  );
+
+function asHtmlDocument$1(self) {
+  return Js_primitive.null_to_opt(Curry._1(asHtmlDocument, self));
+}
+
+function ofNode(node) {
+  var match = +(NodeRe.nodeType(node) === /* Document */8);
+  if (match !== 0) {
+    return /* Some */[node];
+  } else {
+    return /* None */0;
+  }
+}
+
+function compatMode(self) {
+  return DomTypesRe.decodeCompatMode(self.compatMode);
+}
+
+function visibilityState(self) {
+  return DomTypesRe.decodeVisibilityState(self.visibilityState);
+}
+
+var nodeType = include[0];
+
+exports.Impl = Impl;
+exports.nodeType = nodeType;
+exports.asHtmlDocument = asHtmlDocument$1;
+exports.ofNode = ofNode;
+exports.compatMode = compatMode;
+exports.visibilityState = visibilityState;
+/* include Not a pure module */
+
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+
+function Impl() {
+  return /* module */[];
+}
+
+exports.Impl = Impl;
+/* No side effect */
+
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+
+function Impl() {
+  return /* module */[];
+}
+
+exports.Impl = Impl;
 /* No side effect */
 
 
