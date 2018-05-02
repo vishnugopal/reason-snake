@@ -29,7 +29,42 @@ let canvasHeight =
   |> map(HtmlElement.offsetHeight)
   |> unsafelyUnwrapOption;
 
-let drawScene = ctx => {
+type cell = {
+  x: int,
+  y: int,
+};
+
+let drawCell = (ctx, cell) => {
+  Canvas2d.setFillStyle(ctx, String, "#1179BF");
+  Canvas2d.setStrokeStyle(ctx, String, "white");
+  Canvas2d.fillRect(
+    ~x=float(cell.x) *. 10.,
+    ~y=float(cell.y) *. 10.,
+    ~w=10.,
+    ~h=10.,
+    ctx,
+  );
+  Canvas2d.strokeRect(
+    ~x=float(cell.x) *. 10.,
+    ~y=float(cell.y) *. 10.,
+    ~w=10.,
+    ~h=10.,
+    ctx,
+  );
+};
+
+let snake = [
+  {x: 10, y: 10},
+  {x: 11, y: 10},
+  {x: 12, y: 10},
+  {x: 13, y: 10},
+];
+
+let drawSnake = (ctx, snake) => List.iter(drawCell(ctx), snake);
+
+let renderSnake = drawSnake(ctx);
+
+let clearCanvas = ctx =>
   ctx
   |> Canvas2d.clearRect(
        ~x=0.,
@@ -37,33 +72,11 @@ let drawScene = ctx => {
        ~w=float_of_int(canvasWidth),
        ~h=float_of_int(canvasHeight),
      );
-  /* Snake */
-  /* Canvas2d.setFillStyle(ctx, String, fillColor);
-  Canvas2d.fillRect(~x, ~y, ~w, ~h, ctx);
-  Canvas2d.setStrokeStyle(ctx, String, strokeColor);
-  Canvas2d.strokeRect(~x, ~y, ~w, ~h, ctx); */
 
-  Canvas2d.setFillStyle(ctx, String, "#1179BF");
-  Canvas2d.setStrokeStyle(ctx, String, "white");
-  /* Right */
-  ctx |> Canvas2d.fillRect(~x=40., ~y=0., ~w=10., ~h=10.);
-  ctx |> Canvas2d.strokeRect(~x=40., ~y=0., ~w=10., ~h=10.);
-  ctx |> Canvas2d.fillRect(~x=50., ~y=0., ~w=10., ~h=10.);
-  ctx |> Canvas2d.strokeRect(~x=50., ~y=0., ~w=10., ~h=10.);
-  /* Down */
-  ctx |> Canvas2d.fillRect(~x=50., ~y=10., ~w=10., ~h=10.);
-  ctx |> Canvas2d.strokeRect(~x=50., ~y=10., ~w=10., ~h=10.);
-  ctx |> Canvas2d.fillRect(~x=50., ~y=20., ~w=10., ~h=10.);
-  ctx |> Canvas2d.strokeRect(~x=50., ~y=20., ~w=10., ~h=10.);
-  ctx |> Canvas2d.fillRect(~x=50., ~y=30., ~w=10., ~h=10.);
-  ctx |> Canvas2d.strokeRect(~x=50., ~y=30., ~w=10., ~h=10.);
-  ctx |> Canvas2d.fillRect(~x=50., ~y=40., ~w=10., ~h=10.);
-  ctx |> Canvas2d.strokeRect(~x=50., ~y=40., ~w=10., ~h=10.);
-  ctx |> Canvas2d.fillRect(~x=50., ~y=50., ~w=10., ~h=10.);
-  ctx |> Canvas2d.strokeRect(~x=50., ~y=50., ~w=10., ~h=10.);
-  /* Right */
-  ctx |> Canvas2d.fillRect(~x=60., ~y=50., ~w=10., ~h=10.);
-  ctx |> Canvas2d.strokeRect(~x=60., ~y=50., ~w=10., ~h=10.);
+let renderScene = ctx => {
+  clearCanvas(ctx);
+  renderSnake(snake);
+  Js.log("drawing");
 };
 
-ctx |> drawScene;
+Js.Global.setInterval(() => renderScene(ctx), 300);
