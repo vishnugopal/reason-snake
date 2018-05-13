@@ -40,8 +40,8 @@ let drawCell = (fillColor, cell) => {
     ctx,
   );
   Canvas2d.strokeRect(
-    ~x=float(cell.x) *. 10.,
-    ~y=float(cell.y) *. 10.,
+    ~x=float(Cell.x(cell)) *. 10.,
+    ~y=float(Cell.y(cell)) *. 10.,
     ~w=10.,
     ~h=10.,
     ctx,

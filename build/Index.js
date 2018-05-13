@@ -7320,7 +7320,7 @@ function drawCell(fillColor, cell) {
   Canvas2dRe.setFillStyle(ctx, /* String */0, fillColor);
   Canvas2dRe.setStrokeStyle(ctx, /* String */0, "white");
   ctx.fillRect(Cell$ReactSnake.x(cell) * 10, Cell$ReactSnake.y(cell) * 10, 10, 10);
-  ctx.strokeRect(cell[/* x */0] * 10, cell[/* y */1] * 10, 10, 10);
+  ctx.strokeRect(Cell$ReactSnake.x(cell) * 10, Cell$ReactSnake.y(cell) * 10, 10, 10);
   return /* () */0;
 }
 
