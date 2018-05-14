@@ -11,7 +11,7 @@ let initialSnake = Snake.create([(10, 10), (11, 10), (12, 10), (13, 10)]);
 
 let initialFood = Food.create((30, 20));
 
-let initialDirection = Direction.Right;
+let initialDirection = Direction.right;
 
 let initialWorld = World.create(initialSnake, initialFood, initialDirection);
 
@@ -41,8 +41,8 @@ let handleEvent = evt => {
     ...oldWorld,
     direction:
       switch (getKey(evt)) {
-      | Key.ArrowUp => Direction.Up
-      | Key.ArrowRight => Direction.Right
+      | Key.ArrowUp => Direction.up
+      | Key.ArrowRight => Direction.right
       | Key.Ignored => oldWorld.direction
       },
   };
