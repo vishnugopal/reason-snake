@@ -1,3 +1,5 @@
 type t = Cell.t;
 
-let create = Cell.create;
+let create: ((int, int)) => t = Cell.create;
+
+let convertToCell = t => Cell.create((Cell.x(t), Cell.y(t)));

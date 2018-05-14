@@ -54,4 +54,4 @@ let drawFoodCell = drawCell("#af2010");
 
 let drawSnake = snake => List.iter(drawSnakeCell, snake);
 
-let drawFood = food => drawFoodCell(food);
+let drawFood = food => drawFoodCell(Food.convertToCell(food));

@@ -2,7 +2,7 @@
 
 Run this project:
 
-```
+```shell
 npm install
 npm start
 # in another tab

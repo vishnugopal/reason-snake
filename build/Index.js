@@ -7298,6 +7298,7 @@ var Canvas2dRe = __webpack_require__(29);
 var Js_primitive = __webpack_require__(4);
 var Ext$ReactSnake = __webpack_require__(34);
 var Cell$ReactSnake = __webpack_require__(33);
+var Food$ReactSnake = __webpack_require__(36);
 
 var canvasEl = Ext$ReactSnake.Option[/* unsafelyUnwrapOption */1](Js_primitive.null_undefined_to_opt(document.getElementById("snake-game")));
 
@@ -7328,24 +7329,15 @@ function drawSnakeCell(param) {
   return drawCell("#1179BF", param);
 }
 
-function drawFoodCell(param) {
-  return drawCell("#af2010", param);
-}
-
 function drawSnake(snake) {
   return List.iter(drawSnakeCell, snake);
 }
 
-var drawFood = drawFoodCell;
+function drawFood(food) {
+  return drawCell("#af2010", Food$ReactSnake.convertToCell(food));
+}
 
-exports.canvasEl = canvasEl;
-exports.ctx = ctx;
-exports.canvasWidth = canvasWidth;
-exports.canvasHeight = canvasHeight;
 exports.clearCanvas = clearCanvas;
-exports.drawCell = drawCell;
-exports.drawSnakeCell = drawSnakeCell;
-exports.drawFoodCell = drawFoodCell;
 exports.drawSnake = drawSnake;
 exports.drawFood = drawFood;
 /* canvasEl Not a pure module */
@@ -7361,9 +7353,17 @@ exports.drawFood = drawFood;
 
 var Cell$ReactSnake = __webpack_require__(33);
 
+function convertToCell(t) {
+  return Cell$ReactSnake.create(/* tuple */[
+              Cell$ReactSnake.x(t),
+              Cell$ReactSnake.y(t)
+            ]);
+}
+
 var create = Cell$ReactSnake.create;
 
 exports.create = create;
+exports.convertToCell = convertToCell;
 /* No side effect */
 
 
