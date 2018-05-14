@@ -1733,18 +1733,11 @@ function getKey(evt) {
 
 function handleTick() {
   var oldWorld = state[0];
-  var newWorld_000 = /* snake */Snake$ReactSnake.move(oldWorld[/* snake */0]);
-  var newWorld_001 = /* food */oldWorld[/* food */1];
-  var newWorld_002 = /* direction */oldWorld[/* direction */2];
-  var newWorld = /* record */[
-    newWorld_000,
-    newWorld_001,
-    newWorld_002
-  ];
+  var newWorld = World$ReactSnake.create(Snake$ReactSnake.move(World$ReactSnake.snake(oldWorld)), World$ReactSnake.food(oldWorld), World$ReactSnake.direction(oldWorld));
   state[0] = newWorld;
   Draw$ReactSnake.clearCanvas(/* () */0);
-  Draw$ReactSnake.drawSnake(state[0][/* snake */0]);
-  return Draw$ReactSnake.drawFood(state[0][/* food */1]);
+  Draw$ReactSnake.drawSnake(World$ReactSnake.snake(state[0]));
+  return Draw$ReactSnake.drawFood(World$ReactSnake.food(state[0]));
 }
 
 setInterval(handleTick, 300);
@@ -1752,26 +1745,20 @@ setInterval(handleTick, 300);
 function handleEvent(evt) {
   var oldWorld = state[0];
   var match = getKey(evt);
-  var tmp;
+  var newDirection;
   switch (match) {
     case 0 : 
-        tmp = /* Up */0;
+        newDirection = /* Up */0;
         break;
     case 1 : 
-        tmp = /* Right */1;
+        newDirection = /* Right */1;
         break;
     case 2 : 
-        tmp = oldWorld[/* direction */2];
+        newDirection = World$ReactSnake.direction(oldWorld);
         break;
     
   }
-  var newWorld_000 = /* snake */oldWorld[/* snake */0];
-  var newWorld_001 = /* food */oldWorld[/* food */1];
-  var newWorld = /* record */[
-    newWorld_000,
-    newWorld_001,
-    /* direction */tmp
-  ];
+  var newWorld = World$ReactSnake.create(World$ReactSnake.snake(oldWorld), World$ReactSnake.food(oldWorld), newDirection);
   state[0] = newWorld;
   return /* () */0;
 }
@@ -7419,7 +7406,22 @@ function create(snake, food, direction) {
         ];
 }
 
+function snake(t) {
+  return t[/* snake */0];
+}
+
+function food(t) {
+  return t[/* food */1];
+}
+
+function direction(t) {
+  return t[/* direction */2];
+}
+
 exports.create = create;
+exports.snake = snake;
+exports.food = food;
+exports.direction = direction;
 /* No side effect */
 
 

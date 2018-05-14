@@ -13,7 +13,12 @@ let initialFood = Food.create((30, 20));
 
 let initialDirection = Direction.Right;
 
-let initialWorld = World.create(initialSnake, initialFood, initialDirection);
+let initialWorld =
+  World.create(
+    ~snake=initialSnake,
+    ~food=initialFood,
+    ~direction=initialDirection,
+  );
 
 let state = ref(initialWorld);
 
@@ -26,26 +31,34 @@ let getKey = evt =>
 
 let handleTick = () => {
   let oldWorld = state^;
-  let newWorld = {...oldWorld, snake: Snake.move(oldWorld.snake)};
+  let newWorld =
+    World.create(
+      ~snake=Snake.move(World.snake(oldWorld)),
+      ~food=World.food(oldWorld),
+      ~direction=World.direction(oldWorld),
+    );
   state := newWorld;
   Draw.clearCanvas();
-  Draw.drawSnake(state^.snake);
-  Draw.drawFood(state^.food);
+  Draw.drawSnake(World.snake(state^));
+  Draw.drawFood(World.food(state^));
 };
 
 Js.Global.setInterval(handleTick, 300);
 
 let handleEvent = evt => {
   let oldWorld = state^;
-  let newWorld = {
-    ...oldWorld,
-    direction:
-      switch (getKey(evt)) {
-      | Key.ArrowUp => Direction.Up
-      | Key.ArrowRight => Direction.Right
-      | Key.Ignored => oldWorld.direction
-      },
-  };
+  let newDirection =
+    switch (getKey(evt)) {
+    | Key.ArrowUp => Direction.Up
+    | Key.ArrowRight => Direction.Right
+    | Key.Ignored => World.direction(oldWorld)
+    };
+  let newWorld =
+    World.create(
+      ~snake=World.snake(oldWorld),
+      ~food=World.food(oldWorld),
+      ~direction=newDirection,
+    );
   state := newWorld;
 };
 
