@@ -7299,6 +7299,7 @@ var Js_primitive = __webpack_require__(4);
 var Ext$ReactSnake = __webpack_require__(34);
 var Cell$ReactSnake = __webpack_require__(33);
 var Food$ReactSnake = __webpack_require__(36);
+var Snake$ReactSnake = __webpack_require__(37);
 
 var canvasEl = Ext$ReactSnake.Option[/* unsafelyUnwrapOption */1](Js_primitive.null_undefined_to_opt(document.getElementById("snake-game")));
 
@@ -7330,7 +7331,7 @@ function drawSnakeCell(param) {
 }
 
 function drawSnake(snake) {
-  return List.iter(drawSnakeCell, snake);
+  return List.iter(drawSnakeCell, Snake$ReactSnake.convertToCells(snake));
 }
 
 function drawFood(food) {
@@ -7391,8 +7392,13 @@ function move(t) {
               }), t);
 }
 
+function convertToCells(t) {
+  return t;
+}
+
 exports.create = create;
 exports.move = move;
+exports.convertToCells = convertToCells;
 /* No side effect */
 
 

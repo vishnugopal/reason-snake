@@ -52,6 +52,7 @@ let drawSnakeCell = drawCell("#1179BF");
 
 let drawFoodCell = drawCell("#af2010");
 
-let drawSnake = snake => List.iter(drawSnakeCell, snake);
+let drawSnake = snake =>
+  List.iter(drawSnakeCell, Snake.convertToCells(snake));
 
 let drawFood = food => drawFoodCell(Food.convertToCell(food));
