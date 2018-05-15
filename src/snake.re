@@ -4,14 +4,14 @@ let create = xs => List.map(Cell.create, xs);
 
 /*
 
- Move up moves a snake up.
+ Move a snake.
 
  Steps:
  1. Delete last cell.
- 2. Insert a new cell at the beginning which has (x, y - 1)
+ 2. Insert a new cell at the beginning which has new coordinates according to the direction.
 
  */
-let moveSnake = (snake: t, direction: Direction.t) : t => {
+let move = (snake: t, ~toDirection as direction: Direction.t) : t => {
   let rec deleteLast = (snake: t) : t =>
     switch (snake) {
     | [] => []
@@ -38,24 +38,4 @@ let moveSnake = (snake: t, direction: Direction.t) : t => {
   };
 };
 
-let move = (t, ~fromDirection: Direction.t, ~toDirection: Direction.t) =>
-  switch (fromDirection, toDirection) {
-  | (Up, Up)
-  | (Right, Up)
-  | (Left, Up) => moveSnake(t, toDirection)
-  | (Right, Right)
-  | (Up, Right)
-  | (Down, Right) => moveSnake(t, toDirection)
-  | (Up, Left)
-  | (Down, Left)
-  | (Left, Left) => moveSnake(t, toDirection)
-  | (Left, Down)
-  | (Right, Down)
-  | (Down, Down) => moveSnake(t, toDirection)
-  | (Down, Up)
-  | (Up, Down)
-  | (Left, Right)
-  | (Right, Left) => t
-  };
-
-let convertToCells: t => list(Cell.t) = t => t;
+let body: t => list(Cell.t) = t => t;

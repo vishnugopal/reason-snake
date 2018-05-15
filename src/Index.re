@@ -38,7 +38,6 @@ let handleTick = () => {
       ~snake=
         Snake.move(
           World.snake(oldWorld),
-          ~fromDirection=World.direction(oldWorld),
           ~toDirection=World.direction(oldWorld),
         ),
       ~food=World.food(oldWorld),

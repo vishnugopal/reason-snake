@@ -3450,7 +3450,7 @@ exports.repeat = repeat;
 
 var Cell$ReactSnake = __webpack_require__(5);
 
-function convertToCell(t) {
+function position(t) {
   return Cell$ReactSnake.create(/* tuple */[
               Cell$ReactSnake.x(t),
               Cell$ReactSnake.y(t)
@@ -3460,7 +3460,7 @@ function convertToCell(t) {
 var create = Cell$ReactSnake.create;
 
 exports.create = create;
-exports.convertToCell = convertToCell;
+exports.position = position;
 /* No side effect */
 
 
@@ -3480,7 +3480,7 @@ function create(xs) {
   return List.map(Cell$ReactSnake.create, xs);
 }
 
-function moveSnake(snake, direction) {
+function move(snake, direction) {
   var deleteLast = function (snake) {
     if (snake) {
       var tail = snake[1];
@@ -3563,63 +3563,13 @@ function moveSnake(snake, direction) {
   }
 }
 
-function move(t, fromDirection, toDirection) {
-  switch (fromDirection) {
-    case 0 : 
-        switch (toDirection) {
-          case 1 : 
-              return t;
-          case 0 : 
-          case 2 : 
-          case 3 : 
-              return moveSnake(t, toDirection);
-          
-        }
-        break;
-    case 1 : 
-        switch (toDirection) {
-          case 0 : 
-              return t;
-          case 1 : 
-          case 2 : 
-          case 3 : 
-              return moveSnake(t, toDirection);
-          
-        }
-        break;
-    case 2 : 
-        switch (toDirection) {
-          case 0 : 
-          case 1 : 
-          case 2 : 
-              return moveSnake(t, toDirection);
-          case 3 : 
-              return t;
-          
-        }
-        break;
-    case 3 : 
-        switch (toDirection) {
-          case 2 : 
-              return t;
-          case 0 : 
-          case 1 : 
-          case 3 : 
-              return moveSnake(t, toDirection);
-          
-        }
-        break;
-    
-  }
-}
-
-function convertToCells(t) {
+function body(t) {
   return t;
 }
 
 exports.create = create;
 exports.move = move;
-exports.convertToCells = convertToCells;
+exports.body = body;
 /* No side effect */
 
 
@@ -3696,7 +3646,7 @@ function getKey(evt) {
 
 function handleTick() {
   var oldWorld = state[0];
-  var newWorld = World$ReactSnake.create(Snake$ReactSnake.move(World$ReactSnake.snake(oldWorld), World$ReactSnake.direction(oldWorld), World$ReactSnake.direction(oldWorld)), World$ReactSnake.food(oldWorld), World$ReactSnake.direction(oldWorld));
+  var newWorld = World$ReactSnake.create(Snake$ReactSnake.move(World$ReactSnake.snake(oldWorld), World$ReactSnake.direction(oldWorld)), World$ReactSnake.food(oldWorld), World$ReactSnake.direction(oldWorld));
   state[0] = newWorld;
   Draw$ReactSnake.clearCanvas(/* () */0);
   Draw$ReactSnake.drawSnake(World$ReactSnake.snake(state[0]));
@@ -4044,11 +3994,11 @@ function drawSnakeCell(param) {
 }
 
 function drawSnake(snake) {
-  return List.iter(drawSnakeCell, Snake$ReactSnake.convertToCells(snake));
+  return List.iter(drawSnakeCell, Snake$ReactSnake.body(snake));
 }
 
 function drawFood(food) {
-  return drawCell("#af2010", Food$ReactSnake.convertToCell(food));
+  return drawCell("#af2010", Food$ReactSnake.position(food));
 }
 
 exports.clearCanvas = clearCanvas;
