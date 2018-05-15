@@ -33,7 +33,12 @@ let handleTick = () => {
   let oldWorld = state^;
   let newWorld =
     World.create(
-      ~snake=Snake.move(World.snake(oldWorld)),
+      ~snake=
+        Snake.move(
+          World.snake(oldWorld),
+          ~fromDirection=World.direction(oldWorld),
+          ~toDirection=World.direction(oldWorld),
+        ),
       ~food=World.food(oldWorld),
       ~direction=World.direction(oldWorld),
     );
