@@ -3473,19 +3473,144 @@ exports.convertToCell = convertToCell;
 
 
 var List = __webpack_require__(9);
+var Pervasives = __webpack_require__(24);
 var Cell$ReactSnake = __webpack_require__(5);
 
 function create(xs) {
   return List.map(Cell$ReactSnake.create, xs);
 }
 
-function move(t, _, _$1) {
-  return List.map((function (cell) {
-                return Cell$ReactSnake.create(/* tuple */[
-                            Cell$ReactSnake.x(cell) + 1 | 0,
-                            Cell$ReactSnake.y(cell)
-                          ]);
-              }), t);
+function moveSnake(snake, direction) {
+  var deleteLast = function (snake) {
+    if (snake) {
+      var tail = snake[1];
+      if (tail) {
+        return Pervasives.$at(/* :: */[
+                    snake[0],
+                    /* [] */0
+                  ], deleteLast(tail));
+      } else {
+        return /* [] */0;
+      }
+    } else {
+      return /* [] */0;
+    }
+  };
+  var moveUpSingle = function (cell) {
+    return Cell$ReactSnake.create(/* tuple */[
+                Cell$ReactSnake.x(cell),
+                Cell$ReactSnake.y(cell) - 1 | 0
+              ]);
+  };
+  var moveDownSingle = function (cell) {
+    return Cell$ReactSnake.create(/* tuple */[
+                Cell$ReactSnake.x(cell),
+                Cell$ReactSnake.y(cell) + 1 | 0
+              ]);
+  };
+  var moveLeftSingle = function (cell) {
+    return Cell$ReactSnake.create(/* tuple */[
+                Cell$ReactSnake.x(cell) - 1 | 0,
+                Cell$ReactSnake.y(cell)
+              ]);
+  };
+  var moveRightSingle = function (cell) {
+    return Cell$ReactSnake.create(/* tuple */[
+                Cell$ReactSnake.x(cell) + 1 | 0,
+                Cell$ReactSnake.y(cell)
+              ]);
+  };
+  if (snake) {
+    var tail = snake[1];
+    var head = snake[0];
+    switch (direction) {
+      case 0 : 
+          return Pervasives.$at(/* :: */[
+                      moveUpSingle(head),
+                      /* [] */0
+                    ], Pervasives.$at(/* :: */[
+                          head,
+                          /* [] */0
+                        ], deleteLast(tail)));
+      case 1 : 
+          return Pervasives.$at(/* :: */[
+                      moveDownSingle(head),
+                      /* [] */0
+                    ], Pervasives.$at(/* :: */[
+                          head,
+                          /* [] */0
+                        ], deleteLast(tail)));
+      case 2 : 
+          return Pervasives.$at(/* :: */[
+                      moveLeftSingle(head),
+                      /* [] */0
+                    ], Pervasives.$at(/* :: */[
+                          head,
+                          /* [] */0
+                        ], deleteLast(tail)));
+      case 3 : 
+          return Pervasives.$at(/* :: */[
+                      moveRightSingle(head),
+                      /* [] */0
+                    ], Pervasives.$at(/* :: */[
+                          head,
+                          /* [] */0
+                        ], deleteLast(tail)));
+      
+    }
+  } else {
+    return /* [] */0;
+  }
+}
+
+function move(t, fromDirection, toDirection) {
+  switch (fromDirection) {
+    case 0 : 
+        switch (toDirection) {
+          case 1 : 
+              return t;
+          case 0 : 
+          case 2 : 
+          case 3 : 
+              return moveSnake(t, toDirection);
+          
+        }
+        break;
+    case 1 : 
+        switch (toDirection) {
+          case 0 : 
+              return t;
+          case 1 : 
+          case 2 : 
+          case 3 : 
+              return moveSnake(t, toDirection);
+          
+        }
+        break;
+    case 2 : 
+        switch (toDirection) {
+          case 0 : 
+          case 1 : 
+          case 2 : 
+              return moveSnake(t, toDirection);
+          case 3 : 
+              return t;
+          
+        }
+        break;
+    case 3 : 
+        switch (toDirection) {
+          case 2 : 
+              return t;
+          case 0 : 
+          case 1 : 
+          case 3 : 
+              return moveSnake(t, toDirection);
+          
+        }
+        break;
+    
+  }
 }
 
 function convertToCells(t) {
@@ -3549,19 +3674,23 @@ var initialFood = Food$ReactSnake.create(/* tuple */[
       20
     ]);
 
-var initialWorld = World$ReactSnake.create(initialSnake, initialFood, /* Right */1);
+var initialWorld = World$ReactSnake.create(initialSnake, initialFood, /* Right */3);
 
 var state = [initialWorld];
 
 function getKey(evt) {
   var match = evt.key;
   switch (match) {
+    case "ArrowDown" : 
+        return /* ArrowDown */1;
+    case "ArrowLeft" : 
+        return /* ArrowLeft */2;
     case "ArrowRight" : 
-        return /* ArrowRight */1;
+        return /* ArrowRight */3;
     case "ArrowUp" : 
         return /* ArrowUp */0;
     default:
-      return /* Ignored */2;
+      return /* Ignored */4;
   }
 }
 
@@ -3579,15 +3708,22 @@ setInterval(handleTick, 300);
 function handleEvent(evt) {
   var oldWorld = state[0];
   var match = getKey(evt);
+  var match$1 = World$ReactSnake.direction(oldWorld);
   var newDirection;
   switch (match) {
     case 0 : 
-        newDirection = /* Up */0;
+        newDirection = match$1 !== 1 ? /* Up */0 : World$ReactSnake.direction(oldWorld);
         break;
     case 1 : 
-        newDirection = /* Right */1;
+        newDirection = match$1 !== 0 ? /* Down */1 : World$ReactSnake.direction(oldWorld);
         break;
     case 2 : 
+        newDirection = match$1 >= 3 ? World$ReactSnake.direction(oldWorld) : /* Left */2;
+        break;
+    case 3 : 
+        newDirection = match$1 !== 2 ? /* Right */3 : World$ReactSnake.direction(oldWorld);
+        break;
+    case 4 : 
         newDirection = World$ReactSnake.direction(oldWorld);
         break;
     
@@ -3599,7 +3735,7 @@ function handleEvent(evt) {
 
 documentEventTarget.addEventListener("keydown", handleEvent);
 
-var initialDirection = /* Right */1;
+var initialDirection = /* Right */3;
 
 exports.documentEventTarget = documentEventTarget;
 exports.initialSnake = initialSnake;

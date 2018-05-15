@@ -25,6 +25,8 @@ let state = ref(initialWorld);
 let getKey = evt =>
   switch (KeyboardEvent.key(evt)) {
   | "ArrowUp" => Key.ArrowUp
+  | "ArrowDown" => Key.ArrowDown
+  | "ArrowLeft" => Key.ArrowLeft
   | "ArrowRight" => Key.ArrowRight
   | _ => Ignored
   };
@@ -53,10 +55,16 @@ Js.Global.setInterval(handleTick, 300);
 let handleEvent = evt => {
   let oldWorld = state^;
   let newDirection =
-    switch (getKey(evt)) {
-    | Key.ArrowUp => Direction.Up
-    | Key.ArrowRight => Direction.Right
-    | Key.Ignored => World.direction(oldWorld)
+    switch (getKey(evt), World.direction(oldWorld)) {
+    | (Key.ArrowUp, Direction.Down)
+    | (Key.ArrowDown, Direction.Up)
+    | (Key.ArrowRight, Direction.Left)
+    | (Key.ArrowLeft, Direction.Right) => World.direction(oldWorld)
+    | (Key.ArrowUp, _) => Direction.Up
+    | (Key.ArrowDown, _) => Direction.Down
+    | (Key.ArrowLeft, _) => Direction.Left
+    | (Key.ArrowRight, _) => Direction.Right
+    | (Key.Ignored, _) => World.direction(oldWorld)
     };
   let newWorld =
     World.create(
