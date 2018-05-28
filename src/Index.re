@@ -45,20 +45,10 @@ let handleTick = () => {
     | Failure("tl") => World.keys(oldWorld)
     };
   let newDirection =
-    switch (latestKey, World.direction(oldWorld)) {
-    /* Ignore inputs opposite to the current direction */
-    | (Key.ArrowUp, Direction.Down)
-    | (Key.ArrowDown, Direction.Up)
-    | (Key.ArrowRight, Direction.Left)
-    | (Key.ArrowLeft, Direction.Right) => World.direction(oldWorld)
-    /* Otherwise, change direction */
-    | (Key.ArrowUp, _) => Direction.Up
-    | (Key.ArrowDown, _) => Direction.Down
-    | (Key.ArrowLeft, _) => Direction.Left
-    | (Key.ArrowRight, _) => Direction.Right
-    /* And ignore keys that are not direction keys */
-    | (Key.Ignored, _) => World.direction(oldWorld)
-    };
+    Direction.findDirection(
+      ~key=latestKey,
+      ~oldDirection=World.direction(oldWorld),
+    );
   let newWorld =
     World.create(
       ~snake=
@@ -76,7 +66,7 @@ let handleTick = () => {
   Draw.drawFood(World.food(state^));
 };
 
-Js.Global.setInterval(handleTick, 300);
+Js.Global.setInterval(handleTick, 200);
 
 let handleEvent = evt => {
   let oldWorld = state^;
