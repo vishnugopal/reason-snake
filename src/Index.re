@@ -13,11 +13,14 @@ let initialFood = Food.create((30, 20));
 
 let initialDirection = Direction.Right;
 
+let initialKeys = [Key.Ignored];
+
 let initialWorld =
   World.create(
     ~snake=initialSnake,
     ~food=initialFood,
     ~direction=initialDirection,
+    ~keys=initialKeys,
   );
 
 let state = ref(initialWorld);
@@ -33,28 +36,16 @@ let getKey = evt =>
 
 let handleTick = () => {
   let oldWorld = state^;
-  let newWorld =
-    World.create(
-      ~snake=
-        Snake.move(
-          World.snake(oldWorld),
-          ~toDirection=World.direction(oldWorld),
-        ),
-      ~food=World.food(oldWorld),
-      ~direction=World.direction(oldWorld),
-    );
-  state := newWorld;
-  Draw.clearCanvas();
-  Draw.drawSnake(World.snake(state^));
-  Draw.drawFood(World.food(state^));
-};
-
-Js.Global.setInterval(handleTick, 300);
-
-let handleEvent = evt => {
-  let oldWorld = state^;
+  let latestKey =
+    try (List.hd(World.keys(oldWorld))) {
+    | Failure("hd") => Key.Ignored
+    };
+  let newKeys =
+    try (List.tl(World.keys(oldWorld))) {
+    | Failure("tl") => World.keys(oldWorld)
+    };
   let newDirection =
-    switch (getKey(evt), World.direction(oldWorld)) {
+    switch (latestKey, World.direction(oldWorld)) {
     /* Ignore inputs opposite to the current direction */
     | (Key.ArrowUp, Direction.Down)
     | (Key.ArrowDown, Direction.Up)
@@ -70,9 +61,32 @@ let handleEvent = evt => {
     };
   let newWorld =
     World.create(
-      ~snake=World.snake(oldWorld),
+      ~snake=
+        Snake.move(
+          World.snake(oldWorld),
+          ~toDirection=World.direction(oldWorld),
+        ),
       ~food=World.food(oldWorld),
       ~direction=newDirection,
+      ~keys=newKeys,
+    );
+  state := newWorld;
+  Draw.clearCanvas();
+  Draw.drawSnake(World.snake(state^));
+  Draw.drawFood(World.food(state^));
+};
+
+Js.Global.setInterval(handleTick, 300);
+
+let handleEvent = evt => {
+  let oldWorld = state^;
+  let newKeys = World.keys(oldWorld) @ [getKey(evt)];
+  let newWorld =
+    World.create(
+      ~snake=World.snake(oldWorld),
+      ~food=World.food(oldWorld),
+      ~direction=World.direction(oldWorld),
+      ~keys=newKeys,
     );
   state := newWorld;
 };

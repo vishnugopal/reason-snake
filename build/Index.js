@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/Users/vishnugopal/Developer/Sandbox/reason/reason-snake/build/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 17);
+/******/ 	return __webpack_require__(__webpack_require__.s = 18);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -884,436 +884,9 @@ exports.option_get_unwrap = option_get_unwrap;
 "use strict";
 
 
-var Caml_builtin_exceptions = __webpack_require__(0);
-
-function encodeCompareHow(param) {
-  return param;
-}
-
-function decodeCompareResult(param) {
-  var switcher = param + 1 | 0;
-  if (switcher > 2 || switcher < 0) {
-    return /* Unknown */3;
-  } else {
-    return switcher;
-  }
-}
-
-function decodeCompatMode(param) {
-  switch (param) {
-    case "BackCompat" : 
-        return /* BackCompat */0;
-    case "CSS1Compat" : 
-        return /* CSS1Compat */1;
-    default:
-      return /* Unknown */2;
-  }
-}
-
-function encodeContentEditable(param) {
-  switch (param) {
-    case 0 : 
-        return "true";
-    case 1 : 
-        return "false";
-    case 2 : 
-        return "inherit";
-    case 3 : 
-        return "";
-    
-  }
-}
-
-function decodeContentEditable(param) {
-  switch (param) {
-    case "false" : 
-        return /* False */1;
-    case "inherit" : 
-        return /* Inherit */2;
-    case "true" : 
-        return /* True */0;
-    default:
-      return /* Unknown */3;
-  }
-}
-
-function decodeDeltaMode(param) {
-  if (param > 2 || param < 0) {
-    throw [
-          Caml_builtin_exceptions.invalid_argument,
-          "invalid deltaMode"
-        ];
-  } else {
-    return param;
-  }
-}
-
-function encodeDesignMode(param) {
-  switch (param) {
-    case 0 : 
-        return "on";
-    case 1 : 
-        return "off";
-    case 2 : 
-        return "";
-    
-  }
-}
-
-function decodeDesignMode(param) {
-  switch (param) {
-    case "off" : 
-        return /* Off */1;
-    case "on" : 
-        return /* On */0;
-    default:
-      return /* Unknown */2;
-  }
-}
-
-function encodeDir(param) {
-  switch (param) {
-    case 0 : 
-        return "ltr";
-    case 1 : 
-        return "rtl";
-    case 2 : 
-        return "";
-    
-  }
-}
-
-function decodeDir(param) {
-  switch (param) {
-    case "ltr" : 
-        return /* Ltr */0;
-    case "rtl" : 
-        return /* Rtl */1;
-    default:
-      return /* Unknown */2;
-  }
-}
-
-function decodeEventPhase(param) {
-  if (param > 3 || param < 0) {
-    return /* Unknown */4;
-  } else {
-    return param;
-  }
-}
-
-function encodeFilterAction(param) {
-  return param + 1 | 0;
-}
-
-function encodeInsertPosition(param) {
-  switch (param) {
-    case 0 : 
-        return "beforebegin";
-    case 1 : 
-        return "afterbegin";
-    case 2 : 
-        return "beforeend";
-    case 3 : 
-        return "afterend";
-    
-  }
-}
-
-function encodeModifierKey(param) {
-  switch (param) {
-    case 0 : 
-        return "Alt";
-    case 1 : 
-        return "AltGraph";
-    case 2 : 
-        return "CapsLock";
-    case 3 : 
-        return "Control";
-    case 4 : 
-        return "Fn";
-    case 5 : 
-        return "FnLock";
-    case 6 : 
-        return "Hyper";
-    case 7 : 
-        return "Meta";
-    case 8 : 
-        return "NumLock";
-    case 9 : 
-        return "ScrollLock";
-    case 10 : 
-        return "Shift";
-    case 11 : 
-        return "Super";
-    case 12 : 
-        return "Symbol";
-    case 13 : 
-        return "SymbolLock";
-    
-  }
-}
-
-function decodeNodeType(param) {
-  var switcher = param - 1 | 0;
-  if (switcher > 11 || switcher < 0) {
-    return /* Unknown */12;
-  } else {
-    return switcher;
-  }
-}
-
-function decodePointerType(param) {
-  switch (param) {
-    case "mouse" : 
-        return /* Mouse */0;
-    case "pen" : 
-        return /* Pen */1;
-    case "touch|" : 
-        return /* Touch */2;
-    default:
-      return /* Unknown */3;
-  }
-}
-
-function decodeReadyState(param) {
-  switch (param) {
-    case "complete" : 
-        return /* Complete */2;
-    case "interactive" : 
-        return /* Interactive */1;
-    case "loading" : 
-        return /* Loading */0;
-    default:
-      return /* Unknown */3;
-  }
-}
-
-function decodeShadowRootMode(param) {
-  switch (param) {
-    case "closed" : 
-        return /* Closed */1;
-    case "open" : 
-        return /* Open */0;
-    default:
-      throw [
-            Caml_builtin_exceptions.invalid_argument,
-            "Unknown shadowRootMode"
-          ];
-  }
-}
-
-function decodeVisibilityState(param) {
-  switch (param) {
-    case "hidden" : 
-        return /* Hidden */1;
-    case "prerender" : 
-        return /* Prerender */2;
-    case "unloaded" : 
-        return /* Unloaded */3;
-    case "visible" : 
-        return /* Visible */0;
-    default:
-      return /* Unknown */4;
-  }
-}
-
-function many(param) {
-  if (param) {
-    return param[0] | many(param[1]);
-  } else {
-    return 0;
-  }
-}
-
-var WhatToShow = /* module */[
-  /* _All */-1,
-  /* _Element */1,
-  /* _Attribute */2,
-  /* _Text */4,
-  /* _CDATASection */8,
-  /* _EntityReference */16,
-  /* _Entity */32,
-  /* _ProcessingInstruction */64,
-  /* _Comment */128,
-  /* _Document */256,
-  /* _DocumentType */512,
-  /* _DocumentFragment */1024,
-  /* _Notation */2048,
-  /* many */many
-];
-
-exports.encodeCompareHow = encodeCompareHow;
-exports.decodeCompareResult = decodeCompareResult;
-exports.decodeCompatMode = decodeCompatMode;
-exports.encodeContentEditable = encodeContentEditable;
-exports.decodeContentEditable = decodeContentEditable;
-exports.decodeDeltaMode = decodeDeltaMode;
-exports.encodeDesignMode = encodeDesignMode;
-exports.decodeDesignMode = decodeDesignMode;
-exports.encodeDir = encodeDir;
-exports.decodeDir = decodeDir;
-exports.decodeEventPhase = decodeEventPhase;
-exports.encodeFilterAction = encodeFilterAction;
-exports.encodeInsertPosition = encodeInsertPosition;
-exports.encodeModifierKey = encodeModifierKey;
-exports.decodeNodeType = decodeNodeType;
-exports.decodePointerType = decodePointerType;
-exports.decodeReadyState = decodeReadyState;
-exports.decodeShadowRootMode = decodeShadowRootMode;
-exports.decodeVisibilityState = decodeVisibilityState;
-exports.WhatToShow = WhatToShow;
-/* No side effect */
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-
-function Impl() {
-  return /* module */[];
-}
-
-exports.Impl = Impl;
-/* No side effect */
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-// Generated by BUCKLESCRIPT VERSION 2.2.2, PLEASE EDIT WITH CARE
-
-
-
-function x(t) {
-  return t[/* x */0];
-}
-
-function y(t) {
-  return t[/* y */1];
-}
-
-function create(param) {
-  return /* record */[
-          /* x */param[0],
-          /* y */param[1]
-        ];
-}
-
-exports.x = x;
-exports.y = y;
-exports.create = create;
-/* No side effect */
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var DomTypesRe = __webpack_require__(3);
-var EventTargetRe = __webpack_require__(4);
-
-function Impl() {
-  var nodeType = function (self) {
-    return DomTypesRe.decodeNodeType(self.nodeType);
-  };
-  return /* module */[/* nodeType */nodeType];
-}
-
-EventTargetRe.Impl(/* module */[]);
-
-function nodeType(self) {
-  return DomTypesRe.decodeNodeType(self.nodeType);
-}
-
-exports.Impl = Impl;
-exports.nodeType = nodeType;
-/*  Not a pure module */
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-
-function Impl() {
-  return /* module */[];
-}
-
-exports.Impl = Impl;
-/* No side effect */
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-// Generated by BUCKLESCRIPT VERSION 2.2.2, PLEASE EDIT WITH CARE
-
-
 var Curry = __webpack_require__(1);
-var Caml_builtin_exceptions = __webpack_require__(0);
-
-function map(f, t) {
-  if (t) {
-    return /* Some */[Curry._1(f, t[0])];
-  } else {
-    return /* None */0;
-  }
-}
-
-function unsafelyUnwrapOption(t) {
-  if (t) {
-    return t[0];
-  } else {
-    throw [
-          Caml_builtin_exceptions.invalid_argument,
-          "Passed `None` to unsafelyUnwrapOption"
-        ];
-  }
-}
-
-function andThen(f, param) {
-  if (param) {
-    return Curry._1(f, param[0]);
-  } else {
-    return /* None */0;
-  }
-}
-
-var Option = /* module */[
-  /* map */map,
-  /* unsafelyUnwrapOption */unsafelyUnwrapOption,
-  /* andThen */andThen
-];
-
-exports.Option = Option;
-/* No side effect */
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Curry = __webpack_require__(1);
-var Caml_obj = __webpack_require__(23);
-var Pervasives = __webpack_require__(24);
+var Caml_obj = __webpack_require__(20);
+var Pervasives = __webpack_require__(4);
 var Caml_builtin_exceptions = __webpack_require__(0);
 
 function length(l) {
@@ -3003,1370 +2576,21 @@ exports.merge = merge;
 
 
 /***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-
-function __(tag, block) {
-  block.tag = tag;
-  return block;
-}
-
-exports.__ = __;
-/* No side effect */
-
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-
-function caml_int_compare(x, y) {
-  if (x < y) {
-    return -1;
-  } else if (x === y) {
-    return 0;
-  } else {
-    return 1;
-  }
-}
-
-function caml_float_compare(x, y) {
-  if (x === y) {
-    return 0;
-  } else if (x < y) {
-    return -1;
-  } else if (x > y || x === x) {
-    return 1;
-  } else if (y === y) {
-    return -1;
-  } else {
-    return 0;
-  }
-}
-
-function caml_string_compare(s1, s2) {
-  if (s1 === s2) {
-    return 0;
-  } else if (s1 < s2) {
-    return -1;
-  } else {
-    return 1;
-  }
-}
-
-function caml_int_min(x, y) {
-  if (x < y) {
-    return x;
-  } else {
-    return y;
-  }
-}
-
-function caml_float_min(x, y) {
-  if (x < y) {
-    return x;
-  } else {
-    return y;
-  }
-}
-
-function caml_string_min(x, y) {
-  if (x < y) {
-    return x;
-  } else {
-    return y;
-  }
-}
-
-function caml_nativeint_min(x, y) {
-  if (x < y) {
-    return x;
-  } else {
-    return y;
-  }
-}
-
-function caml_int32_min(x, y) {
-  if (x < y) {
-    return x;
-  } else {
-    return y;
-  }
-}
-
-function caml_int_max(x, y) {
-  if (x > y) {
-    return x;
-  } else {
-    return y;
-  }
-}
-
-function caml_float_max(x, y) {
-  if (x > y) {
-    return x;
-  } else {
-    return y;
-  }
-}
-
-function caml_string_max(x, y) {
-  if (x > y) {
-    return x;
-  } else {
-    return y;
-  }
-}
-
-function caml_nativeint_max(x, y) {
-  if (x > y) {
-    return x;
-  } else {
-    return y;
-  }
-}
-
-function caml_int32_max(x, y) {
-  if (x > y) {
-    return x;
-  } else {
-    return y;
-  }
-}
-
-var caml_nativeint_compare = caml_int_compare;
-
-var caml_int32_compare = caml_int_compare;
-
-exports.caml_int_compare = caml_int_compare;
-exports.caml_float_compare = caml_float_compare;
-exports.caml_nativeint_compare = caml_nativeint_compare;
-exports.caml_string_compare = caml_string_compare;
-exports.caml_int32_compare = caml_int32_compare;
-exports.caml_int_min = caml_int_min;
-exports.caml_float_min = caml_float_min;
-exports.caml_string_min = caml_string_min;
-exports.caml_nativeint_min = caml_nativeint_min;
-exports.caml_int32_min = caml_int32_min;
-exports.caml_int_max = caml_int_max;
-exports.caml_float_max = caml_float_max;
-exports.caml_string_max = caml_string_max;
-exports.caml_nativeint_max = caml_nativeint_max;
-exports.caml_int32_max = caml_int32_max;
-/* No side effect */
-
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Caml_builtin_exceptions = __webpack_require__(0);
-
-function div(x, y) {
-  if (y === 0) {
-    throw Caml_builtin_exceptions.division_by_zero;
-  } else {
-    return x / y | 0;
-  }
-}
-
-function mod_(x, y) {
-  if (y === 0) {
-    throw Caml_builtin_exceptions.division_by_zero;
-  } else {
-    return x % y;
-  }
-}
-
-function caml_bswap16(x) {
-  return ((x & 255) << 8) | ((x & 65280) >>> 8);
-}
-
-function caml_int32_bswap(x) {
-  return ((x & 255) << 24) | ((x & 65280) << 8) | ((x & 16711680) >>> 8) | ((x & 4278190080) >>> 24);
-}
-
-var imul = ( Math.imul || function (x,y) {
-  y |= 0; return ((((x >> 16) * y) << 16) + (x & 0xffff) * y)|0; 
-}
-);
-
-var caml_nativeint_bswap = caml_int32_bswap;
-
-exports.div = div;
-exports.mod_ = mod_;
-exports.caml_bswap16 = caml_bswap16;
-exports.caml_int32_bswap = caml_int32_bswap;
-exports.caml_nativeint_bswap = caml_nativeint_bswap;
-exports.imul = imul;
-/* imul Not a pure module */
-
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-
-var repeat = ( (String.prototype.repeat && function (count,self){return self.repeat(count)}) ||
-                                                  function(count , self) {
-        if (self.length == 0 || count == 0) {
-            return '';
-        }
-        // Ensuring count is a 31-bit integer allows us to heavily optimize the
-        // main part. But anyway, most current (August 2014) browsers can't handle
-        // strings 1 << 28 chars or longer, so:
-        if (self.length * count >= 1 << 28) {
-            throw new RangeError('repeat count must not overflow maximum string size');
-        }
-        var rpt = '';
-        for (;;) {
-            if ((count & 1) == 1) {
-                rpt += self;
-            }
-            count >>>= 1;
-            if (count == 0) {
-                break;
-            }
-            self += self;
-        }
-        return rpt;
-    }
-);
-
-exports.repeat = repeat;
-/* repeat Not a pure module */
-
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-// Generated by BUCKLESCRIPT VERSION 2.2.2, PLEASE EDIT WITH CARE
-
-
-var Cell$ReactSnake = __webpack_require__(5);
-
-function position(t) {
-  return Cell$ReactSnake.create(/* tuple */[
-              Cell$ReactSnake.x(t),
-              Cell$ReactSnake.y(t)
-            ]);
-}
-
-var create = Cell$ReactSnake.create;
-
-exports.create = create;
-exports.position = position;
-/* No side effect */
-
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-// Generated by BUCKLESCRIPT VERSION 2.2.2, PLEASE EDIT WITH CARE
-
-
-var List = __webpack_require__(9);
-var Pervasives = __webpack_require__(24);
-var Cell$ReactSnake = __webpack_require__(5);
-
-function create(xs) {
-  return List.map(Cell$ReactSnake.create, xs);
-}
-
-function move(snake, direction) {
-  var deleteLast = function (snake) {
-    if (snake) {
-      var tail = snake[1];
-      if (tail) {
-        return Pervasives.$at(/* :: */[
-                    snake[0],
-                    /* [] */0
-                  ], deleteLast(tail));
-      } else {
-        return /* [] */0;
-      }
-    } else {
-      return /* [] */0;
-    }
-  };
-  var moveUpSingle = function (cell) {
-    return Cell$ReactSnake.create(/* tuple */[
-                Cell$ReactSnake.x(cell),
-                Cell$ReactSnake.y(cell) - 1 | 0
-              ]);
-  };
-  var moveDownSingle = function (cell) {
-    return Cell$ReactSnake.create(/* tuple */[
-                Cell$ReactSnake.x(cell),
-                Cell$ReactSnake.y(cell) + 1 | 0
-              ]);
-  };
-  var moveLeftSingle = function (cell) {
-    return Cell$ReactSnake.create(/* tuple */[
-                Cell$ReactSnake.x(cell) - 1 | 0,
-                Cell$ReactSnake.y(cell)
-              ]);
-  };
-  var moveRightSingle = function (cell) {
-    return Cell$ReactSnake.create(/* tuple */[
-                Cell$ReactSnake.x(cell) + 1 | 0,
-                Cell$ReactSnake.y(cell)
-              ]);
-  };
-  if (snake) {
-    var tail = snake[1];
-    var head = snake[0];
-    switch (direction) {
-      case 0 : 
-          return Pervasives.$at(/* :: */[
-                      moveUpSingle(head),
-                      /* [] */0
-                    ], Pervasives.$at(/* :: */[
-                          head,
-                          /* [] */0
-                        ], deleteLast(tail)));
-      case 1 : 
-          return Pervasives.$at(/* :: */[
-                      moveDownSingle(head),
-                      /* [] */0
-                    ], Pervasives.$at(/* :: */[
-                          head,
-                          /* [] */0
-                        ], deleteLast(tail)));
-      case 2 : 
-          return Pervasives.$at(/* :: */[
-                      moveLeftSingle(head),
-                      /* [] */0
-                    ], Pervasives.$at(/* :: */[
-                          head,
-                          /* [] */0
-                        ], deleteLast(tail)));
-      case 3 : 
-          return Pervasives.$at(/* :: */[
-                      moveRightSingle(head),
-                      /* [] */0
-                    ], Pervasives.$at(/* :: */[
-                          head,
-                          /* [] */0
-                        ], deleteLast(tail)));
-      
-    }
-  } else {
-    return /* [] */0;
-  }
-}
-
-function body(t) {
-  return t;
-}
-
-exports.create = create;
-exports.move = move;
-exports.body = body;
-/* No side effect */
-
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-// Generated by BUCKLESCRIPT VERSION 2.2.2, PLEASE EDIT WITH CARE
-
-
-var DocumentRe = __webpack_require__(18);
-var Js_primitive = __webpack_require__(2);
-var Ext$ReactSnake = __webpack_require__(8);
-var Draw$ReactSnake = __webpack_require__(22);
-var Food$ReactSnake = __webpack_require__(15);
-var Snake$ReactSnake = __webpack_require__(16);
-var World$ReactSnake = __webpack_require__(38);
-
-var documentEventTarget = Ext$ReactSnake.Option[/* unsafelyUnwrapOption */1](Ext$ReactSnake.Option[/* andThen */2]((function (prim) {
-            return Js_primitive.null_undefined_to_opt(prim.body);
-          }), DocumentRe.asHtmlDocument(document)));
-
-var initialSnake = Snake$ReactSnake.create(/* :: */[
-      /* tuple */[
-        10,
-        10
-      ],
-      /* :: */[
-        /* tuple */[
-          11,
-          10
-        ],
-        /* :: */[
-          /* tuple */[
-            12,
-            10
-          ],
-          /* :: */[
-            /* tuple */[
-              13,
-              10
-            ],
-            /* [] */0
-          ]
-        ]
-      ]
-    ]);
-
-var initialFood = Food$ReactSnake.create(/* tuple */[
-      30,
-      20
-    ]);
-
-var initialWorld = World$ReactSnake.create(initialSnake, initialFood, /* Right */3);
-
-var state = [initialWorld];
-
-function getKey(evt) {
-  var match = evt.key;
-  switch (match) {
-    case "ArrowDown" : 
-        return /* ArrowDown */1;
-    case "ArrowLeft" : 
-        return /* ArrowLeft */2;
-    case "ArrowRight" : 
-        return /* ArrowRight */3;
-    case "ArrowUp" : 
-        return /* ArrowUp */0;
-    default:
-      return /* Ignored */4;
-  }
-}
-
-function handleTick() {
-  var oldWorld = state[0];
-  var newWorld = World$ReactSnake.create(Snake$ReactSnake.move(World$ReactSnake.snake(oldWorld), World$ReactSnake.direction(oldWorld)), World$ReactSnake.food(oldWorld), World$ReactSnake.direction(oldWorld));
-  state[0] = newWorld;
-  Draw$ReactSnake.clearCanvas(/* () */0);
-  Draw$ReactSnake.drawSnake(World$ReactSnake.snake(state[0]));
-  return Draw$ReactSnake.drawFood(World$ReactSnake.food(state[0]));
-}
-
-setInterval(handleTick, 300);
-
-function handleEvent(evt) {
-  var oldWorld = state[0];
-  var match = getKey(evt);
-  var match$1 = World$ReactSnake.direction(oldWorld);
-  var newDirection;
-  switch (match) {
-    case 0 : 
-        newDirection = match$1 !== 1 ? /* Up */0 : World$ReactSnake.direction(oldWorld);
-        break;
-    case 1 : 
-        newDirection = match$1 !== 0 ? /* Down */1 : World$ReactSnake.direction(oldWorld);
-        break;
-    case 2 : 
-        newDirection = match$1 >= 3 ? World$ReactSnake.direction(oldWorld) : /* Left */2;
-        break;
-    case 3 : 
-        newDirection = match$1 !== 2 ? /* Right */3 : World$ReactSnake.direction(oldWorld);
-        break;
-    case 4 : 
-        newDirection = World$ReactSnake.direction(oldWorld);
-        break;
-    
-  }
-  var newWorld = World$ReactSnake.create(World$ReactSnake.snake(oldWorld), World$ReactSnake.food(oldWorld), newDirection);
-  state[0] = newWorld;
-  return /* () */0;
-}
-
-documentEventTarget.addEventListener("keydown", handleEvent);
-
-var initialDirection = /* Right */3;
-
-exports.documentEventTarget = documentEventTarget;
-exports.initialSnake = initialSnake;
-exports.initialFood = initialFood;
-exports.initialDirection = initialDirection;
-exports.initialWorld = initialWorld;
-exports.state = state;
-exports.getKey = getKey;
-exports.handleTick = handleTick;
-exports.handleEvent = handleEvent;
-/* documentEventTarget Not a pure module */
-
-
-/***/ }),
-/* 18 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var Curry = __webpack_require__(1);
-var NodeRe = __webpack_require__(6);
-var DomTypesRe = __webpack_require__(3);
-var Js_primitive = __webpack_require__(2);
-var ParentNodeRe = __webpack_require__(7);
-var EventTargetRe = __webpack_require__(4);
-var DocumentOrShadowRootRe = __webpack_require__(20);
-var NonElementParentNodeRe = __webpack_require__(21);
-
-function Impl() {
-  var asHtmlDocument = (
-    function (document) {
-      return document.doctype.name === "html" ?  document : null;
-    }
-  );
-  var asHtmlDocument$1 = function (self) {
-    return Js_primitive.null_to_opt(Curry._1(asHtmlDocument, self));
-  };
-  var ofNode = function (node) {
-    var match = +(NodeRe.nodeType(node) === /* Document */8);
-    if (match !== 0) {
-      return /* Some */[node];
-    } else {
-      return /* None */0;
-    }
-  };
-  var compatMode = function (self) {
-    return DomTypesRe.decodeCompatMode(self.compatMode);
-  };
-  var visibilityState = function (self) {
-    return DomTypesRe.decodeVisibilityState(self.visibilityState);
-  };
-  return /* module */[
-          /* asHtmlDocument */asHtmlDocument$1,
-          /* ofNode */ofNode,
-          /* compatMode */compatMode,
-          /* visibilityState */visibilityState
-        ];
-}
-
-var include = NodeRe.Impl(/* module */[]);
-
-EventTargetRe.Impl(/* module */[]);
-
-NonElementParentNodeRe.Impl(/* module */[]);
-
-DocumentOrShadowRootRe.Impl(/* module */[]);
-
-ParentNodeRe.Impl(/* module */[]);
-
-var asHtmlDocument = (
-    function (document) {
-      return document.doctype.name === "html" ?  document : null;
-    }
-  );
-
-function asHtmlDocument$1(self) {
-  return Js_primitive.null_to_opt(Curry._1(asHtmlDocument, self));
-}
-
-function ofNode(node) {
-  var match = +(NodeRe.nodeType(node) === /* Document */8);
-  if (match !== 0) {
-    return /* Some */[node];
-  } else {
-    return /* None */0;
-  }
-}
-
-function compatMode(self) {
-  return DomTypesRe.decodeCompatMode(self.compatMode);
-}
-
-function visibilityState(self) {
-  return DomTypesRe.decodeVisibilityState(self.visibilityState);
-}
-
-var nodeType = include[0];
-
-exports.Impl = Impl;
-exports.nodeType = nodeType;
-exports.asHtmlDocument = asHtmlDocument$1;
-exports.ofNode = ofNode;
-exports.compatMode = compatMode;
-exports.visibilityState = visibilityState;
-/* include Not a pure module */
-
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
+var Caml_io = __webpack_require__(21);
+var Caml_sys = __webpack_require__(22);
+var Caml_format = __webpack_require__(23);
+var Caml_string = __webpack_require__(25);
+var Caml_exceptions = __webpack_require__(26);
+var Caml_missing_polyfill = __webpack_require__(27);
 var Caml_builtin_exceptions = __webpack_require__(0);
-
-function caml_array_sub(x, offset, len) {
-  var result = new Array(len);
-  var j = 0;
-  var i = offset;
-  while(j < len) {
-    result[j] = x[i];
-    j = j + 1 | 0;
-    i = i + 1 | 0;
-  };
-  return result;
-}
-
-function len(_acc, _l) {
-  while(true) {
-    var l = _l;
-    var acc = _acc;
-    if (l) {
-      _l = l[1];
-      _acc = l[0].length + acc | 0;
-      continue ;
-      
-    } else {
-      return acc;
-    }
-  };
-}
-
-function fill(arr, _i, _l) {
-  while(true) {
-    var l = _l;
-    var i = _i;
-    if (l) {
-      var x = l[0];
-      var l$1 = x.length;
-      var k = i;
-      var j = 0;
-      while(j < l$1) {
-        arr[k] = x[j];
-        k = k + 1 | 0;
-        j = j + 1 | 0;
-      };
-      _l = l[1];
-      _i = k;
-      continue ;
-      
-    } else {
-      return /* () */0;
-    }
-  };
-}
-
-function caml_array_concat(l) {
-  var v = len(0, l);
-  var result = new Array(v);
-  fill(result, 0, l);
-  return result;
-}
-
-function caml_array_set(xs, index, newval) {
-  if (index < 0 || index >= xs.length) {
-    throw [
-          Caml_builtin_exceptions.invalid_argument,
-          "index out of bounds"
-        ];
-  } else {
-    xs[index] = newval;
-    return /* () */0;
-  }
-}
-
-function caml_array_get(xs, index) {
-  if (index < 0 || index >= xs.length) {
-    throw [
-          Caml_builtin_exceptions.invalid_argument,
-          "index out of bounds"
-        ];
-  } else {
-    return xs[index];
-  }
-}
-
-function caml_make_vect(len, init) {
-  var b = new Array(len);
-  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
-    b[i] = init;
-  }
-  return b;
-}
-
-function caml_array_blit(a1, i1, a2, i2, len) {
-  if (i2 <= i1) {
-    for(var j = 0 ,j_finish = len - 1 | 0; j <= j_finish; ++j){
-      a2[j + i2 | 0] = a1[j + i1 | 0];
-    }
-    return /* () */0;
-  } else {
-    for(var j$1 = len - 1 | 0; j$1 >= 0; --j$1){
-      a2[j$1 + i2 | 0] = a1[j$1 + i1 | 0];
-    }
-    return /* () */0;
-  }
-}
-
-exports.caml_array_sub = caml_array_sub;
-exports.caml_array_concat = caml_array_concat;
-exports.caml_make_vect = caml_make_vect;
-exports.caml_array_blit = caml_array_blit;
-exports.caml_array_get = caml_array_get;
-exports.caml_array_set = caml_array_set;
-/* No side effect */
-
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-
-function Impl() {
-  return /* module */[];
-}
-
-exports.Impl = Impl;
-/* No side effect */
-
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-
-function Impl() {
-  return /* module */[];
-}
-
-exports.Impl = Impl;
-/* No side effect */
-
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-// Generated by BUCKLESCRIPT VERSION 2.2.2, PLEASE EDIT WITH CARE
-
-
-var List = __webpack_require__(9);
-var ElementRe = __webpack_require__(33);
-var Canvas2dRe = __webpack_require__(37);
-var Js_primitive = __webpack_require__(2);
-var Ext$ReactSnake = __webpack_require__(8);
-var Cell$ReactSnake = __webpack_require__(5);
-var Food$ReactSnake = __webpack_require__(15);
-var Snake$ReactSnake = __webpack_require__(16);
-
-var canvasEl = Ext$ReactSnake.Option[/* unsafelyUnwrapOption */1](Js_primitive.null_undefined_to_opt(document.getElementById("snake-game")));
-
-var ctx = canvasEl.getContext("2d");
-
-var canvasWidth = Ext$ReactSnake.Option[/* unsafelyUnwrapOption */1](Ext$ReactSnake.Option[/* map */0]((function (prim) {
-            return prim.offsetWidth;
-          }), ElementRe.asHtmlElement(canvasEl)));
-
-var canvasHeight = Ext$ReactSnake.Option[/* unsafelyUnwrapOption */1](Ext$ReactSnake.Option[/* map */0]((function (prim) {
-            return prim.offsetHeight;
-          }), ElementRe.asHtmlElement(canvasEl)));
-
-function clearCanvas() {
-  ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-  return /* () */0;
-}
-
-function drawCell(fillColor, cell) {
-  Canvas2dRe.setFillStyle(ctx, /* String */0, fillColor);
-  Canvas2dRe.setStrokeStyle(ctx, /* String */0, "white");
-  ctx.fillRect(Cell$ReactSnake.x(cell) * 10, Cell$ReactSnake.y(cell) * 10, 10, 10);
-  ctx.strokeRect(Cell$ReactSnake.x(cell) * 10, Cell$ReactSnake.y(cell) * 10, 10, 10);
-  return /* () */0;
-}
-
-function drawSnakeCell(param) {
-  return drawCell("#1179BF", param);
-}
-
-function drawSnake(snake) {
-  return List.iter(drawSnakeCell, Snake$ReactSnake.body(snake));
-}
-
-function drawFood(food) {
-  return drawCell("#af2010", Food$ReactSnake.position(food));
-}
-
-exports.clearCanvas = clearCanvas;
-exports.drawSnake = drawSnake;
-exports.drawFood = drawFood;
-/* canvasEl Not a pure module */
-
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Block = __webpack_require__(10);
-var Caml_primitive = __webpack_require__(11);
-var Caml_builtin_exceptions = __webpack_require__(0);
-
-function caml_obj_block(tag, size) {
-  var v = new Array(size);
-  v.tag = tag;
-  return v;
-}
-
-function caml_obj_dup(x) {
-  var len = x.length | 0;
-  var v = new Array(len);
-  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
-    v[i] = x[i];
-  }
-  v.tag = x.tag | 0;
-  return v;
-}
-
-function caml_obj_truncate(x, new_size) {
-  var len = x.length | 0;
-  if (new_size <= 0 || new_size > len) {
-    throw [
-          Caml_builtin_exceptions.invalid_argument,
-          "Obj.truncate"
-        ];
-  } else if (len !== new_size) {
-    for(var i = new_size ,i_finish = len - 1 | 0; i <= i_finish; ++i){
-      x[i] = 0;
-    }
-    x.length = new_size;
-    return /* () */0;
-  } else {
-    return 0;
-  }
-}
-
-function caml_lazy_make_forward(x) {
-  return Block.__(250, [x]);
-}
-
-function caml_update_dummy(x, y) {
-  var len = y.length | 0;
-  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
-    x[i] = y[i];
-  }
-  var y_tag = y.tag | 0;
-  if (y_tag !== 0) {
-    x.tag = y_tag;
-    return /* () */0;
-  } else {
-    return 0;
-  }
-}
-
-function caml_compare(_a, _b) {
-  while(true) {
-    var b = _b;
-    var a = _a;
-    if (a === b) {
-      return 0;
-    } else {
-      var a_type = typeof a;
-      var b_type = typeof b;
-      if (a_type === "string") {
-        return Caml_primitive.caml_string_compare(a, b);
-      } else {
-        var is_a_number = +(a_type === "number");
-        var is_b_number = +(b_type === "number");
-        if (is_a_number !== 0) {
-          if (is_b_number !== 0) {
-            return Caml_primitive.caml_int_compare(a, b);
-          } else {
-            return -1;
-          }
-        } else if (is_b_number !== 0) {
-          return 1;
-        } else if (a_type === "boolean" || a_type === "undefined" || a === null) {
-          var x = a;
-          var y = b;
-          if (x === y) {
-            return 0;
-          } else if (x < y) {
-            return -1;
-          } else {
-            return 1;
-          }
-        } else if (a_type === "function" || b_type === "function") {
-          throw [
-                Caml_builtin_exceptions.invalid_argument,
-                "compare: functional value"
-              ];
-        } else {
-          var tag_a = a.tag | 0;
-          var tag_b = b.tag | 0;
-          if (tag_a === 250) {
-            _a = a[0];
-            continue ;
-            
-          } else if (tag_b === 250) {
-            _b = b[0];
-            continue ;
-            
-          } else if (tag_a === 248) {
-            return Caml_primitive.caml_int_compare(a[1], b[1]);
-          } else if (tag_a === 251) {
-            throw [
-                  Caml_builtin_exceptions.invalid_argument,
-                  "equal: abstract value"
-                ];
-          } else if (tag_a !== tag_b) {
-            if (tag_a < tag_b) {
-              return -1;
-            } else {
-              return 1;
-            }
-          } else {
-            var len_a = a.length | 0;
-            var len_b = b.length | 0;
-            if (len_a === len_b) {
-              var a$1 = a;
-              var b$1 = b;
-              var _i = 0;
-              var same_length = len_a;
-              while(true) {
-                var i = _i;
-                if (i === same_length) {
-                  return 0;
-                } else {
-                  var res = caml_compare(a$1[i], b$1[i]);
-                  if (res !== 0) {
-                    return res;
-                  } else {
-                    _i = i + 1 | 0;
-                    continue ;
-                    
-                  }
-                }
-              };
-            } else if (len_a < len_b) {
-              var a$2 = a;
-              var b$2 = b;
-              var _i$1 = 0;
-              var short_length = len_a;
-              while(true) {
-                var i$1 = _i$1;
-                if (i$1 === short_length) {
-                  return -1;
-                } else {
-                  var res$1 = caml_compare(a$2[i$1], b$2[i$1]);
-                  if (res$1 !== 0) {
-                    return res$1;
-                  } else {
-                    _i$1 = i$1 + 1 | 0;
-                    continue ;
-                    
-                  }
-                }
-              };
-            } else {
-              var a$3 = a;
-              var b$3 = b;
-              var _i$2 = 0;
-              var short_length$1 = len_b;
-              while(true) {
-                var i$2 = _i$2;
-                if (i$2 === short_length$1) {
-                  return 1;
-                } else {
-                  var res$2 = caml_compare(a$3[i$2], b$3[i$2]);
-                  if (res$2 !== 0) {
-                    return res$2;
-                  } else {
-                    _i$2 = i$2 + 1 | 0;
-                    continue ;
-                    
-                  }
-                }
-              };
-            }
-          }
-        }
-      }
-    }
-  };
-}
-
-function caml_equal(_a, _b) {
-  while(true) {
-    var b = _b;
-    var a = _a;
-    if (a === b) {
-      return /* true */1;
-    } else {
-      var a_type = typeof a;
-      if (a_type === "string" || a_type === "number" || a_type === "boolean" || a_type === "undefined" || a === null) {
-        return /* false */0;
-      } else {
-        var b_type = typeof b;
-        if (a_type === "function" || b_type === "function") {
-          throw [
-                Caml_builtin_exceptions.invalid_argument,
-                "equal: functional value"
-              ];
-        } else if (b_type === "number" || b_type === "undefined" || b === null) {
-          return /* false */0;
-        } else {
-          var tag_a = a.tag | 0;
-          var tag_b = b.tag | 0;
-          if (tag_a === 250) {
-            _a = a[0];
-            continue ;
-            
-          } else if (tag_b === 250) {
-            _b = b[0];
-            continue ;
-            
-          } else if (tag_a === 248) {
-            return +(a[1] === b[1]);
-          } else if (tag_a === 251) {
-            throw [
-                  Caml_builtin_exceptions.invalid_argument,
-                  "equal: abstract value"
-                ];
-          } else if (tag_a !== tag_b) {
-            return /* false */0;
-          } else {
-            var len_a = a.length | 0;
-            var len_b = b.length | 0;
-            if (len_a === len_b) {
-              var a$1 = a;
-              var b$1 = b;
-              var _i = 0;
-              var same_length = len_a;
-              while(true) {
-                var i = _i;
-                if (i === same_length) {
-                  return /* true */1;
-                } else if (caml_equal(a$1[i], b$1[i])) {
-                  _i = i + 1 | 0;
-                  continue ;
-                  
-                } else {
-                  return /* false */0;
-                }
-              };
-            } else {
-              return /* false */0;
-            }
-          }
-        }
-      }
-    }
-  };
-}
-
-function caml_equal_null(x, y) {
-  if (y !== null) {
-    return caml_equal(x, y);
-  } else {
-    return +(x === y);
-  }
-}
-
-function caml_equal_undefined(x, y) {
-  if (y !== undefined) {
-    return caml_equal(x, y);
-  } else {
-    return +(x === y);
-  }
-}
-
-function caml_equal_nullable(x, y) {
-  if (y == null) {
-    return +(x === y);
-  } else {
-    return caml_equal(x, y);
-  }
-}
-
-function caml_notequal(a, b) {
-  return 1 - caml_equal(a, b);
-}
-
-function caml_greaterequal(a, b) {
-  return +(caml_compare(a, b) >= 0);
-}
-
-function caml_greaterthan(a, b) {
-  return +(caml_compare(a, b) > 0);
-}
-
-function caml_lessequal(a, b) {
-  return +(caml_compare(a, b) <= 0);
-}
-
-function caml_lessthan(a, b) {
-  return +(caml_compare(a, b) < 0);
-}
-
-function caml_min(x, y) {
-  if (caml_compare(x, y) <= 0) {
-    return x;
-  } else {
-    return y;
-  }
-}
-
-function caml_max(x, y) {
-  if (caml_compare(x, y) >= 0) {
-    return x;
-  } else {
-    return y;
-  }
-}
-
-exports.caml_obj_block = caml_obj_block;
-exports.caml_obj_dup = caml_obj_dup;
-exports.caml_obj_truncate = caml_obj_truncate;
-exports.caml_lazy_make_forward = caml_lazy_make_forward;
-exports.caml_update_dummy = caml_update_dummy;
-exports.caml_compare = caml_compare;
-exports.caml_equal = caml_equal;
-exports.caml_equal_null = caml_equal_null;
-exports.caml_equal_undefined = caml_equal_undefined;
-exports.caml_equal_nullable = caml_equal_nullable;
-exports.caml_notequal = caml_notequal;
-exports.caml_greaterequal = caml_greaterequal;
-exports.caml_greaterthan = caml_greaterthan;
-exports.caml_lessthan = caml_lessthan;
-exports.caml_lessequal = caml_lessequal;
-exports.caml_min = caml_min;
-exports.caml_max = caml_max;
-/* No side effect */
-
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Curry = __webpack_require__(1);
-var Caml_io = __webpack_require__(25);
-var Caml_sys = __webpack_require__(26);
-var Caml_format = __webpack_require__(27);
-var Caml_string = __webpack_require__(29);
-var Caml_exceptions = __webpack_require__(30);
-var Caml_missing_polyfill = __webpack_require__(31);
-var Caml_builtin_exceptions = __webpack_require__(0);
-var CamlinternalFormatBasics = __webpack_require__(32);
+var CamlinternalFormatBasics = __webpack_require__(28);
 
 function failwith(s) {
   throw [
@@ -5029,7 +3253,1641 @@ exports.do_at_exit = do_at_exit;
 
 
 /***/ }),
-/* 25 */
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Caml_builtin_exceptions = __webpack_require__(0);
+
+function encodeCompareHow(param) {
+  return param;
+}
+
+function decodeCompareResult(param) {
+  var switcher = param + 1 | 0;
+  if (switcher > 2 || switcher < 0) {
+    return /* Unknown */3;
+  } else {
+    return switcher;
+  }
+}
+
+function decodeCompatMode(param) {
+  switch (param) {
+    case "BackCompat" : 
+        return /* BackCompat */0;
+    case "CSS1Compat" : 
+        return /* CSS1Compat */1;
+    default:
+      return /* Unknown */2;
+  }
+}
+
+function encodeContentEditable(param) {
+  switch (param) {
+    case 0 : 
+        return "true";
+    case 1 : 
+        return "false";
+    case 2 : 
+        return "inherit";
+    case 3 : 
+        return "";
+    
+  }
+}
+
+function decodeContentEditable(param) {
+  switch (param) {
+    case "false" : 
+        return /* False */1;
+    case "inherit" : 
+        return /* Inherit */2;
+    case "true" : 
+        return /* True */0;
+    default:
+      return /* Unknown */3;
+  }
+}
+
+function decodeDeltaMode(param) {
+  if (param > 2 || param < 0) {
+    throw [
+          Caml_builtin_exceptions.invalid_argument,
+          "invalid deltaMode"
+        ];
+  } else {
+    return param;
+  }
+}
+
+function encodeDesignMode(param) {
+  switch (param) {
+    case 0 : 
+        return "on";
+    case 1 : 
+        return "off";
+    case 2 : 
+        return "";
+    
+  }
+}
+
+function decodeDesignMode(param) {
+  switch (param) {
+    case "off" : 
+        return /* Off */1;
+    case "on" : 
+        return /* On */0;
+    default:
+      return /* Unknown */2;
+  }
+}
+
+function encodeDir(param) {
+  switch (param) {
+    case 0 : 
+        return "ltr";
+    case 1 : 
+        return "rtl";
+    case 2 : 
+        return "";
+    
+  }
+}
+
+function decodeDir(param) {
+  switch (param) {
+    case "ltr" : 
+        return /* Ltr */0;
+    case "rtl" : 
+        return /* Rtl */1;
+    default:
+      return /* Unknown */2;
+  }
+}
+
+function decodeEventPhase(param) {
+  if (param > 3 || param < 0) {
+    return /* Unknown */4;
+  } else {
+    return param;
+  }
+}
+
+function encodeFilterAction(param) {
+  return param + 1 | 0;
+}
+
+function encodeInsertPosition(param) {
+  switch (param) {
+    case 0 : 
+        return "beforebegin";
+    case 1 : 
+        return "afterbegin";
+    case 2 : 
+        return "beforeend";
+    case 3 : 
+        return "afterend";
+    
+  }
+}
+
+function encodeModifierKey(param) {
+  switch (param) {
+    case 0 : 
+        return "Alt";
+    case 1 : 
+        return "AltGraph";
+    case 2 : 
+        return "CapsLock";
+    case 3 : 
+        return "Control";
+    case 4 : 
+        return "Fn";
+    case 5 : 
+        return "FnLock";
+    case 6 : 
+        return "Hyper";
+    case 7 : 
+        return "Meta";
+    case 8 : 
+        return "NumLock";
+    case 9 : 
+        return "ScrollLock";
+    case 10 : 
+        return "Shift";
+    case 11 : 
+        return "Super";
+    case 12 : 
+        return "Symbol";
+    case 13 : 
+        return "SymbolLock";
+    
+  }
+}
+
+function decodeNodeType(param) {
+  var switcher = param - 1 | 0;
+  if (switcher > 11 || switcher < 0) {
+    return /* Unknown */12;
+  } else {
+    return switcher;
+  }
+}
+
+function decodePointerType(param) {
+  switch (param) {
+    case "mouse" : 
+        return /* Mouse */0;
+    case "pen" : 
+        return /* Pen */1;
+    case "touch|" : 
+        return /* Touch */2;
+    default:
+      return /* Unknown */3;
+  }
+}
+
+function decodeReadyState(param) {
+  switch (param) {
+    case "complete" : 
+        return /* Complete */2;
+    case "interactive" : 
+        return /* Interactive */1;
+    case "loading" : 
+        return /* Loading */0;
+    default:
+      return /* Unknown */3;
+  }
+}
+
+function decodeShadowRootMode(param) {
+  switch (param) {
+    case "closed" : 
+        return /* Closed */1;
+    case "open" : 
+        return /* Open */0;
+    default:
+      throw [
+            Caml_builtin_exceptions.invalid_argument,
+            "Unknown shadowRootMode"
+          ];
+  }
+}
+
+function decodeVisibilityState(param) {
+  switch (param) {
+    case "hidden" : 
+        return /* Hidden */1;
+    case "prerender" : 
+        return /* Prerender */2;
+    case "unloaded" : 
+        return /* Unloaded */3;
+    case "visible" : 
+        return /* Visible */0;
+    default:
+      return /* Unknown */4;
+  }
+}
+
+function many(param) {
+  if (param) {
+    return param[0] | many(param[1]);
+  } else {
+    return 0;
+  }
+}
+
+var WhatToShow = /* module */[
+  /* _All */-1,
+  /* _Element */1,
+  /* _Attribute */2,
+  /* _Text */4,
+  /* _CDATASection */8,
+  /* _EntityReference */16,
+  /* _Entity */32,
+  /* _ProcessingInstruction */64,
+  /* _Comment */128,
+  /* _Document */256,
+  /* _DocumentType */512,
+  /* _DocumentFragment */1024,
+  /* _Notation */2048,
+  /* many */many
+];
+
+exports.encodeCompareHow = encodeCompareHow;
+exports.decodeCompareResult = decodeCompareResult;
+exports.decodeCompatMode = decodeCompatMode;
+exports.encodeContentEditable = encodeContentEditable;
+exports.decodeContentEditable = decodeContentEditable;
+exports.decodeDeltaMode = decodeDeltaMode;
+exports.encodeDesignMode = encodeDesignMode;
+exports.decodeDesignMode = decodeDesignMode;
+exports.encodeDir = encodeDir;
+exports.decodeDir = decodeDir;
+exports.decodeEventPhase = decodeEventPhase;
+exports.encodeFilterAction = encodeFilterAction;
+exports.encodeInsertPosition = encodeInsertPosition;
+exports.encodeModifierKey = encodeModifierKey;
+exports.decodeNodeType = decodeNodeType;
+exports.decodePointerType = decodePointerType;
+exports.decodeReadyState = decodeReadyState;
+exports.decodeShadowRootMode = decodeShadowRootMode;
+exports.decodeVisibilityState = decodeVisibilityState;
+exports.WhatToShow = WhatToShow;
+/* No side effect */
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+
+function Impl() {
+  return /* module */[];
+}
+
+exports.Impl = Impl;
+/* No side effect */
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Generated by BUCKLESCRIPT VERSION 2.2.2, PLEASE EDIT WITH CARE
+
+
+
+function x(t) {
+  return t[/* x */0];
+}
+
+function y(t) {
+  return t[/* y */1];
+}
+
+function create(param) {
+  return /* record */[
+          /* x */param[0],
+          /* y */param[1]
+        ];
+}
+
+exports.x = x;
+exports.y = y;
+exports.create = create;
+/* No side effect */
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+
+function __(tag, block) {
+  block.tag = tag;
+  return block;
+}
+
+exports.__ = __;
+/* No side effect */
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+
+function caml_int_compare(x, y) {
+  if (x < y) {
+    return -1;
+  } else if (x === y) {
+    return 0;
+  } else {
+    return 1;
+  }
+}
+
+function caml_float_compare(x, y) {
+  if (x === y) {
+    return 0;
+  } else if (x < y) {
+    return -1;
+  } else if (x > y || x === x) {
+    return 1;
+  } else if (y === y) {
+    return -1;
+  } else {
+    return 0;
+  }
+}
+
+function caml_string_compare(s1, s2) {
+  if (s1 === s2) {
+    return 0;
+  } else if (s1 < s2) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+function caml_int_min(x, y) {
+  if (x < y) {
+    return x;
+  } else {
+    return y;
+  }
+}
+
+function caml_float_min(x, y) {
+  if (x < y) {
+    return x;
+  } else {
+    return y;
+  }
+}
+
+function caml_string_min(x, y) {
+  if (x < y) {
+    return x;
+  } else {
+    return y;
+  }
+}
+
+function caml_nativeint_min(x, y) {
+  if (x < y) {
+    return x;
+  } else {
+    return y;
+  }
+}
+
+function caml_int32_min(x, y) {
+  if (x < y) {
+    return x;
+  } else {
+    return y;
+  }
+}
+
+function caml_int_max(x, y) {
+  if (x > y) {
+    return x;
+  } else {
+    return y;
+  }
+}
+
+function caml_float_max(x, y) {
+  if (x > y) {
+    return x;
+  } else {
+    return y;
+  }
+}
+
+function caml_string_max(x, y) {
+  if (x > y) {
+    return x;
+  } else {
+    return y;
+  }
+}
+
+function caml_nativeint_max(x, y) {
+  if (x > y) {
+    return x;
+  } else {
+    return y;
+  }
+}
+
+function caml_int32_max(x, y) {
+  if (x > y) {
+    return x;
+  } else {
+    return y;
+  }
+}
+
+var caml_nativeint_compare = caml_int_compare;
+
+var caml_int32_compare = caml_int_compare;
+
+exports.caml_int_compare = caml_int_compare;
+exports.caml_float_compare = caml_float_compare;
+exports.caml_nativeint_compare = caml_nativeint_compare;
+exports.caml_string_compare = caml_string_compare;
+exports.caml_int32_compare = caml_int32_compare;
+exports.caml_int_min = caml_int_min;
+exports.caml_float_min = caml_float_min;
+exports.caml_string_min = caml_string_min;
+exports.caml_nativeint_min = caml_nativeint_min;
+exports.caml_int32_min = caml_int32_min;
+exports.caml_int_max = caml_int_max;
+exports.caml_float_max = caml_float_max;
+exports.caml_string_max = caml_string_max;
+exports.caml_nativeint_max = caml_nativeint_max;
+exports.caml_int32_max = caml_int32_max;
+/* No side effect */
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Caml_builtin_exceptions = __webpack_require__(0);
+
+function div(x, y) {
+  if (y === 0) {
+    throw Caml_builtin_exceptions.division_by_zero;
+  } else {
+    return x / y | 0;
+  }
+}
+
+function mod_(x, y) {
+  if (y === 0) {
+    throw Caml_builtin_exceptions.division_by_zero;
+  } else {
+    return x % y;
+  }
+}
+
+function caml_bswap16(x) {
+  return ((x & 255) << 8) | ((x & 65280) >>> 8);
+}
+
+function caml_int32_bswap(x) {
+  return ((x & 255) << 24) | ((x & 65280) << 8) | ((x & 16711680) >>> 8) | ((x & 4278190080) >>> 24);
+}
+
+var imul = ( Math.imul || function (x,y) {
+  y |= 0; return ((((x >> 16) * y) << 16) + (x & 0xffff) * y)|0; 
+}
+);
+
+var caml_nativeint_bswap = caml_int32_bswap;
+
+exports.div = div;
+exports.mod_ = mod_;
+exports.caml_bswap16 = caml_bswap16;
+exports.caml_int32_bswap = caml_int32_bswap;
+exports.caml_nativeint_bswap = caml_nativeint_bswap;
+exports.imul = imul;
+/* imul Not a pure module */
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+
+var repeat = ( (String.prototype.repeat && function (count,self){return self.repeat(count)}) ||
+                                                  function(count , self) {
+        if (self.length == 0 || count == 0) {
+            return '';
+        }
+        // Ensuring count is a 31-bit integer allows us to heavily optimize the
+        // main part. But anyway, most current (August 2014) browsers can't handle
+        // strings 1 << 28 chars or longer, so:
+        if (self.length * count >= 1 << 28) {
+            throw new RangeError('repeat count must not overflow maximum string size');
+        }
+        var rpt = '';
+        for (;;) {
+            if ((count & 1) == 1) {
+                rpt += self;
+            }
+            count >>>= 1;
+            if (count == 0) {
+                break;
+            }
+            self += self;
+        }
+        return rpt;
+    }
+);
+
+exports.repeat = repeat;
+/* repeat Not a pure module */
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var DomTypesRe = __webpack_require__(5);
+var EventTargetRe = __webpack_require__(6);
+
+function Impl() {
+  var nodeType = function (self) {
+    return DomTypesRe.decodeNodeType(self.nodeType);
+  };
+  return /* module */[/* nodeType */nodeType];
+}
+
+EventTargetRe.Impl(/* module */[]);
+
+function nodeType(self) {
+  return DomTypesRe.decodeNodeType(self.nodeType);
+}
+
+exports.Impl = Impl;
+exports.nodeType = nodeType;
+/*  Not a pure module */
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+
+function Impl() {
+  return /* module */[];
+}
+
+exports.Impl = Impl;
+/* No side effect */
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Generated by BUCKLESCRIPT VERSION 2.2.2, PLEASE EDIT WITH CARE
+
+
+var Curry = __webpack_require__(1);
+var Caml_builtin_exceptions = __webpack_require__(0);
+
+function map(f, t) {
+  if (t) {
+    return /* Some */[Curry._1(f, t[0])];
+  } else {
+    return /* None */0;
+  }
+}
+
+function unsafelyUnwrapOption(t) {
+  if (t) {
+    return t[0];
+  } else {
+    throw [
+          Caml_builtin_exceptions.invalid_argument,
+          "Passed `None` to unsafelyUnwrapOption"
+        ];
+  }
+}
+
+function andThen(f, param) {
+  if (param) {
+    return Curry._1(f, param[0]);
+  } else {
+    return /* None */0;
+  }
+}
+
+var Option = /* module */[
+  /* map */map,
+  /* unsafelyUnwrapOption */unsafelyUnwrapOption,
+  /* andThen */andThen
+];
+
+exports.Option = Option;
+/* No side effect */
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Generated by BUCKLESCRIPT VERSION 2.2.2, PLEASE EDIT WITH CARE
+
+
+var Cell$ReactSnake = __webpack_require__(7);
+
+function position(t) {
+  return Cell$ReactSnake.create(/* tuple */[
+              Cell$ReactSnake.x(t),
+              Cell$ReactSnake.y(t)
+            ]);
+}
+
+var create = Cell$ReactSnake.create;
+
+exports.create = create;
+exports.position = position;
+/* No side effect */
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Generated by BUCKLESCRIPT VERSION 2.2.2, PLEASE EDIT WITH CARE
+
+
+var List = __webpack_require__(3);
+var Pervasives = __webpack_require__(4);
+var Cell$ReactSnake = __webpack_require__(7);
+
+function create(xs) {
+  return List.map(Cell$ReactSnake.create, xs);
+}
+
+function move(snake, direction) {
+  var deleteLast = function (snake) {
+    if (snake) {
+      var tail = snake[1];
+      if (tail) {
+        return Pervasives.$at(/* :: */[
+                    snake[0],
+                    /* [] */0
+                  ], deleteLast(tail));
+      } else {
+        return /* [] */0;
+      }
+    } else {
+      return /* [] */0;
+    }
+  };
+  var moveUpSingle = function (cell) {
+    return Cell$ReactSnake.create(/* tuple */[
+                Cell$ReactSnake.x(cell),
+                Cell$ReactSnake.y(cell) - 1 | 0
+              ]);
+  };
+  var moveDownSingle = function (cell) {
+    return Cell$ReactSnake.create(/* tuple */[
+                Cell$ReactSnake.x(cell),
+                Cell$ReactSnake.y(cell) + 1 | 0
+              ]);
+  };
+  var moveLeftSingle = function (cell) {
+    return Cell$ReactSnake.create(/* tuple */[
+                Cell$ReactSnake.x(cell) - 1 | 0,
+                Cell$ReactSnake.y(cell)
+              ]);
+  };
+  var moveRightSingle = function (cell) {
+    return Cell$ReactSnake.create(/* tuple */[
+                Cell$ReactSnake.x(cell) + 1 | 0,
+                Cell$ReactSnake.y(cell)
+              ]);
+  };
+  if (snake) {
+    var tail = snake[1];
+    var head = snake[0];
+    switch (direction) {
+      case 0 : 
+          return Pervasives.$at(/* :: */[
+                      moveUpSingle(head),
+                      /* [] */0
+                    ], Pervasives.$at(/* :: */[
+                          head,
+                          /* [] */0
+                        ], deleteLast(tail)));
+      case 1 : 
+          return Pervasives.$at(/* :: */[
+                      moveDownSingle(head),
+                      /* [] */0
+                    ], Pervasives.$at(/* :: */[
+                          head,
+                          /* [] */0
+                        ], deleteLast(tail)));
+      case 2 : 
+          return Pervasives.$at(/* :: */[
+                      moveLeftSingle(head),
+                      /* [] */0
+                    ], Pervasives.$at(/* :: */[
+                          head,
+                          /* [] */0
+                        ], deleteLast(tail)));
+      case 3 : 
+          return Pervasives.$at(/* :: */[
+                      moveRightSingle(head),
+                      /* [] */0
+                    ], Pervasives.$at(/* :: */[
+                          head,
+                          /* [] */0
+                        ], deleteLast(tail)));
+      
+    }
+  } else {
+    return /* [] */0;
+  }
+}
+
+function body(t) {
+  return t;
+}
+
+exports.create = create;
+exports.move = move;
+exports.body = body;
+/* No side effect */
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Generated by BUCKLESCRIPT VERSION 2.2.2, PLEASE EDIT WITH CARE
+
+
+var List = __webpack_require__(3);
+var Js_exn = __webpack_require__(39);
+var DocumentRe = __webpack_require__(29);
+var Pervasives = __webpack_require__(4);
+var Js_primitive = __webpack_require__(2);
+var Ext$ReactSnake = __webpack_require__(15);
+var Draw$ReactSnake = __webpack_require__(32);
+var Food$ReactSnake = __webpack_require__(16);
+var Snake$ReactSnake = __webpack_require__(17);
+var World$ReactSnake = __webpack_require__(38);
+var Caml_builtin_exceptions = __webpack_require__(0);
+
+var documentEventTarget = Ext$ReactSnake.Option[/* unsafelyUnwrapOption */1](Ext$ReactSnake.Option[/* andThen */2]((function (prim) {
+            return Js_primitive.null_undefined_to_opt(prim.body);
+          }), DocumentRe.asHtmlDocument(document)));
+
+var initialSnake = Snake$ReactSnake.create(/* :: */[
+      /* tuple */[
+        10,
+        10
+      ],
+      /* :: */[
+        /* tuple */[
+          11,
+          10
+        ],
+        /* :: */[
+          /* tuple */[
+            12,
+            10
+          ],
+          /* :: */[
+            /* tuple */[
+              13,
+              10
+            ],
+            /* [] */0
+          ]
+        ]
+      ]
+    ]);
+
+var initialFood = Food$ReactSnake.create(/* tuple */[
+      30,
+      20
+    ]);
+
+var initialKeys = /* :: */[
+  /* Ignored */4,
+  /* [] */0
+];
+
+var initialWorld = World$ReactSnake.create(initialSnake, initialFood, /* Right */3, initialKeys);
+
+var state = [initialWorld];
+
+function getKey(evt) {
+  var match = evt.key;
+  switch (match) {
+    case "ArrowDown" : 
+        return /* ArrowDown */1;
+    case "ArrowLeft" : 
+        return /* ArrowLeft */2;
+    case "ArrowRight" : 
+        return /* ArrowRight */3;
+    case "ArrowUp" : 
+        return /* ArrowUp */0;
+    default:
+      return /* Ignored */4;
+  }
+}
+
+function handleTick() {
+  var oldWorld = state[0];
+  var latestKey;
+  try {
+    latestKey = List.hd(World$ReactSnake.keys(oldWorld));
+  }
+  catch (raw_exn){
+    var exn = Js_exn.internalToOCamlException(raw_exn);
+    if (exn[0] === Caml_builtin_exceptions.failure) {
+      if (exn[1] === "hd") {
+        latestKey = /* Ignored */4;
+      } else {
+        throw exn;
+      }
+    } else {
+      throw exn;
+    }
+  }
+  var newKeys;
+  try {
+    newKeys = List.tl(World$ReactSnake.keys(oldWorld));
+  }
+  catch (raw_exn$1){
+    var exn$1 = Js_exn.internalToOCamlException(raw_exn$1);
+    if (exn$1[0] === Caml_builtin_exceptions.failure) {
+      if (exn$1[1] === "tl") {
+        newKeys = World$ReactSnake.keys(oldWorld);
+      } else {
+        throw exn$1;
+      }
+    } else {
+      throw exn$1;
+    }
+  }
+  var match = World$ReactSnake.direction(oldWorld);
+  var newDirection;
+  switch (latestKey) {
+    case 0 : 
+        newDirection = match !== 1 ? /* Up */0 : World$ReactSnake.direction(oldWorld);
+        break;
+    case 1 : 
+        newDirection = match !== 0 ? /* Down */1 : World$ReactSnake.direction(oldWorld);
+        break;
+    case 2 : 
+        newDirection = match >= 3 ? World$ReactSnake.direction(oldWorld) : /* Left */2;
+        break;
+    case 3 : 
+        newDirection = match !== 2 ? /* Right */3 : World$ReactSnake.direction(oldWorld);
+        break;
+    case 4 : 
+        newDirection = World$ReactSnake.direction(oldWorld);
+        break;
+    
+  }
+  var newWorld = World$ReactSnake.create(Snake$ReactSnake.move(World$ReactSnake.snake(oldWorld), World$ReactSnake.direction(oldWorld)), World$ReactSnake.food(oldWorld), newDirection, newKeys);
+  state[0] = newWorld;
+  Draw$ReactSnake.clearCanvas(/* () */0);
+  Draw$ReactSnake.drawSnake(World$ReactSnake.snake(state[0]));
+  return Draw$ReactSnake.drawFood(World$ReactSnake.food(state[0]));
+}
+
+setInterval(handleTick, 300);
+
+function handleEvent(evt) {
+  var oldWorld = state[0];
+  var newKeys = Pervasives.$at(World$ReactSnake.keys(oldWorld), /* :: */[
+        getKey(evt),
+        /* [] */0
+      ]);
+  var newWorld = World$ReactSnake.create(World$ReactSnake.snake(oldWorld), World$ReactSnake.food(oldWorld), World$ReactSnake.direction(oldWorld), newKeys);
+  state[0] = newWorld;
+  return /* () */0;
+}
+
+documentEventTarget.addEventListener("keydown", handleEvent);
+
+var initialDirection = /* Right */3;
+
+exports.documentEventTarget = documentEventTarget;
+exports.initialSnake = initialSnake;
+exports.initialFood = initialFood;
+exports.initialDirection = initialDirection;
+exports.initialKeys = initialKeys;
+exports.initialWorld = initialWorld;
+exports.state = state;
+exports.getKey = getKey;
+exports.handleTick = handleTick;
+exports.handleEvent = handleEvent;
+/* documentEventTarget Not a pure module */
+
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Caml_builtin_exceptions = __webpack_require__(0);
+
+function caml_array_sub(x, offset, len) {
+  var result = new Array(len);
+  var j = 0;
+  var i = offset;
+  while(j < len) {
+    result[j] = x[i];
+    j = j + 1 | 0;
+    i = i + 1 | 0;
+  };
+  return result;
+}
+
+function len(_acc, _l) {
+  while(true) {
+    var l = _l;
+    var acc = _acc;
+    if (l) {
+      _l = l[1];
+      _acc = l[0].length + acc | 0;
+      continue ;
+      
+    } else {
+      return acc;
+    }
+  };
+}
+
+function fill(arr, _i, _l) {
+  while(true) {
+    var l = _l;
+    var i = _i;
+    if (l) {
+      var x = l[0];
+      var l$1 = x.length;
+      var k = i;
+      var j = 0;
+      while(j < l$1) {
+        arr[k] = x[j];
+        k = k + 1 | 0;
+        j = j + 1 | 0;
+      };
+      _l = l[1];
+      _i = k;
+      continue ;
+      
+    } else {
+      return /* () */0;
+    }
+  };
+}
+
+function caml_array_concat(l) {
+  var v = len(0, l);
+  var result = new Array(v);
+  fill(result, 0, l);
+  return result;
+}
+
+function caml_array_set(xs, index, newval) {
+  if (index < 0 || index >= xs.length) {
+    throw [
+          Caml_builtin_exceptions.invalid_argument,
+          "index out of bounds"
+        ];
+  } else {
+    xs[index] = newval;
+    return /* () */0;
+  }
+}
+
+function caml_array_get(xs, index) {
+  if (index < 0 || index >= xs.length) {
+    throw [
+          Caml_builtin_exceptions.invalid_argument,
+          "index out of bounds"
+        ];
+  } else {
+    return xs[index];
+  }
+}
+
+function caml_make_vect(len, init) {
+  var b = new Array(len);
+  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+    b[i] = init;
+  }
+  return b;
+}
+
+function caml_array_blit(a1, i1, a2, i2, len) {
+  if (i2 <= i1) {
+    for(var j = 0 ,j_finish = len - 1 | 0; j <= j_finish; ++j){
+      a2[j + i2 | 0] = a1[j + i1 | 0];
+    }
+    return /* () */0;
+  } else {
+    for(var j$1 = len - 1 | 0; j$1 >= 0; --j$1){
+      a2[j$1 + i2 | 0] = a1[j$1 + i1 | 0];
+    }
+    return /* () */0;
+  }
+}
+
+exports.caml_array_sub = caml_array_sub;
+exports.caml_array_concat = caml_array_concat;
+exports.caml_make_vect = caml_make_vect;
+exports.caml_array_blit = caml_array_blit;
+exports.caml_array_get = caml_array_get;
+exports.caml_array_set = caml_array_set;
+/* No side effect */
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Block = __webpack_require__(8);
+var Caml_primitive = __webpack_require__(9);
+var Caml_builtin_exceptions = __webpack_require__(0);
+
+function caml_obj_block(tag, size) {
+  var v = new Array(size);
+  v.tag = tag;
+  return v;
+}
+
+function caml_obj_dup(x) {
+  var len = x.length | 0;
+  var v = new Array(len);
+  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+    v[i] = x[i];
+  }
+  v.tag = x.tag | 0;
+  return v;
+}
+
+function caml_obj_truncate(x, new_size) {
+  var len = x.length | 0;
+  if (new_size <= 0 || new_size > len) {
+    throw [
+          Caml_builtin_exceptions.invalid_argument,
+          "Obj.truncate"
+        ];
+  } else if (len !== new_size) {
+    for(var i = new_size ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+      x[i] = 0;
+    }
+    x.length = new_size;
+    return /* () */0;
+  } else {
+    return 0;
+  }
+}
+
+function caml_lazy_make_forward(x) {
+  return Block.__(250, [x]);
+}
+
+function caml_update_dummy(x, y) {
+  var len = y.length | 0;
+  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+    x[i] = y[i];
+  }
+  var y_tag = y.tag | 0;
+  if (y_tag !== 0) {
+    x.tag = y_tag;
+    return /* () */0;
+  } else {
+    return 0;
+  }
+}
+
+function caml_compare(_a, _b) {
+  while(true) {
+    var b = _b;
+    var a = _a;
+    if (a === b) {
+      return 0;
+    } else {
+      var a_type = typeof a;
+      var b_type = typeof b;
+      if (a_type === "string") {
+        return Caml_primitive.caml_string_compare(a, b);
+      } else {
+        var is_a_number = +(a_type === "number");
+        var is_b_number = +(b_type === "number");
+        if (is_a_number !== 0) {
+          if (is_b_number !== 0) {
+            return Caml_primitive.caml_int_compare(a, b);
+          } else {
+            return -1;
+          }
+        } else if (is_b_number !== 0) {
+          return 1;
+        } else if (a_type === "boolean" || a_type === "undefined" || a === null) {
+          var x = a;
+          var y = b;
+          if (x === y) {
+            return 0;
+          } else if (x < y) {
+            return -1;
+          } else {
+            return 1;
+          }
+        } else if (a_type === "function" || b_type === "function") {
+          throw [
+                Caml_builtin_exceptions.invalid_argument,
+                "compare: functional value"
+              ];
+        } else {
+          var tag_a = a.tag | 0;
+          var tag_b = b.tag | 0;
+          if (tag_a === 250) {
+            _a = a[0];
+            continue ;
+            
+          } else if (tag_b === 250) {
+            _b = b[0];
+            continue ;
+            
+          } else if (tag_a === 248) {
+            return Caml_primitive.caml_int_compare(a[1], b[1]);
+          } else if (tag_a === 251) {
+            throw [
+                  Caml_builtin_exceptions.invalid_argument,
+                  "equal: abstract value"
+                ];
+          } else if (tag_a !== tag_b) {
+            if (tag_a < tag_b) {
+              return -1;
+            } else {
+              return 1;
+            }
+          } else {
+            var len_a = a.length | 0;
+            var len_b = b.length | 0;
+            if (len_a === len_b) {
+              var a$1 = a;
+              var b$1 = b;
+              var _i = 0;
+              var same_length = len_a;
+              while(true) {
+                var i = _i;
+                if (i === same_length) {
+                  return 0;
+                } else {
+                  var res = caml_compare(a$1[i], b$1[i]);
+                  if (res !== 0) {
+                    return res;
+                  } else {
+                    _i = i + 1 | 0;
+                    continue ;
+                    
+                  }
+                }
+              };
+            } else if (len_a < len_b) {
+              var a$2 = a;
+              var b$2 = b;
+              var _i$1 = 0;
+              var short_length = len_a;
+              while(true) {
+                var i$1 = _i$1;
+                if (i$1 === short_length) {
+                  return -1;
+                } else {
+                  var res$1 = caml_compare(a$2[i$1], b$2[i$1]);
+                  if (res$1 !== 0) {
+                    return res$1;
+                  } else {
+                    _i$1 = i$1 + 1 | 0;
+                    continue ;
+                    
+                  }
+                }
+              };
+            } else {
+              var a$3 = a;
+              var b$3 = b;
+              var _i$2 = 0;
+              var short_length$1 = len_b;
+              while(true) {
+                var i$2 = _i$2;
+                if (i$2 === short_length$1) {
+                  return 1;
+                } else {
+                  var res$2 = caml_compare(a$3[i$2], b$3[i$2]);
+                  if (res$2 !== 0) {
+                    return res$2;
+                  } else {
+                    _i$2 = i$2 + 1 | 0;
+                    continue ;
+                    
+                  }
+                }
+              };
+            }
+          }
+        }
+      }
+    }
+  };
+}
+
+function caml_equal(_a, _b) {
+  while(true) {
+    var b = _b;
+    var a = _a;
+    if (a === b) {
+      return /* true */1;
+    } else {
+      var a_type = typeof a;
+      if (a_type === "string" || a_type === "number" || a_type === "boolean" || a_type === "undefined" || a === null) {
+        return /* false */0;
+      } else {
+        var b_type = typeof b;
+        if (a_type === "function" || b_type === "function") {
+          throw [
+                Caml_builtin_exceptions.invalid_argument,
+                "equal: functional value"
+              ];
+        } else if (b_type === "number" || b_type === "undefined" || b === null) {
+          return /* false */0;
+        } else {
+          var tag_a = a.tag | 0;
+          var tag_b = b.tag | 0;
+          if (tag_a === 250) {
+            _a = a[0];
+            continue ;
+            
+          } else if (tag_b === 250) {
+            _b = b[0];
+            continue ;
+            
+          } else if (tag_a === 248) {
+            return +(a[1] === b[1]);
+          } else if (tag_a === 251) {
+            throw [
+                  Caml_builtin_exceptions.invalid_argument,
+                  "equal: abstract value"
+                ];
+          } else if (tag_a !== tag_b) {
+            return /* false */0;
+          } else {
+            var len_a = a.length | 0;
+            var len_b = b.length | 0;
+            if (len_a === len_b) {
+              var a$1 = a;
+              var b$1 = b;
+              var _i = 0;
+              var same_length = len_a;
+              while(true) {
+                var i = _i;
+                if (i === same_length) {
+                  return /* true */1;
+                } else if (caml_equal(a$1[i], b$1[i])) {
+                  _i = i + 1 | 0;
+                  continue ;
+                  
+                } else {
+                  return /* false */0;
+                }
+              };
+            } else {
+              return /* false */0;
+            }
+          }
+        }
+      }
+    }
+  };
+}
+
+function caml_equal_null(x, y) {
+  if (y !== null) {
+    return caml_equal(x, y);
+  } else {
+    return +(x === y);
+  }
+}
+
+function caml_equal_undefined(x, y) {
+  if (y !== undefined) {
+    return caml_equal(x, y);
+  } else {
+    return +(x === y);
+  }
+}
+
+function caml_equal_nullable(x, y) {
+  if (y == null) {
+    return +(x === y);
+  } else {
+    return caml_equal(x, y);
+  }
+}
+
+function caml_notequal(a, b) {
+  return 1 - caml_equal(a, b);
+}
+
+function caml_greaterequal(a, b) {
+  return +(caml_compare(a, b) >= 0);
+}
+
+function caml_greaterthan(a, b) {
+  return +(caml_compare(a, b) > 0);
+}
+
+function caml_lessequal(a, b) {
+  return +(caml_compare(a, b) <= 0);
+}
+
+function caml_lessthan(a, b) {
+  return +(caml_compare(a, b) < 0);
+}
+
+function caml_min(x, y) {
+  if (caml_compare(x, y) <= 0) {
+    return x;
+  } else {
+    return y;
+  }
+}
+
+function caml_max(x, y) {
+  if (caml_compare(x, y) >= 0) {
+    return x;
+  } else {
+    return y;
+  }
+}
+
+exports.caml_obj_block = caml_obj_block;
+exports.caml_obj_dup = caml_obj_dup;
+exports.caml_obj_truncate = caml_obj_truncate;
+exports.caml_lazy_make_forward = caml_lazy_make_forward;
+exports.caml_update_dummy = caml_update_dummy;
+exports.caml_compare = caml_compare;
+exports.caml_equal = caml_equal;
+exports.caml_equal_null = caml_equal_null;
+exports.caml_equal_undefined = caml_equal_undefined;
+exports.caml_equal_nullable = caml_equal_nullable;
+exports.caml_notequal = caml_notequal;
+exports.caml_greaterequal = caml_greaterequal;
+exports.caml_greaterthan = caml_greaterthan;
+exports.caml_lessthan = caml_lessthan;
+exports.caml_lessequal = caml_lessequal;
+exports.caml_min = caml_min;
+exports.caml_max = caml_max;
+/* No side effect */
+
+
+/***/ }),
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5164,10 +5022,10 @@ exports.caml_ml_input_char = caml_ml_input_char;
 exports.caml_ml_out_channels_list = caml_ml_out_channels_list;
 /* node_std_output Not a pure module */
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ }),
-/* 26 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5271,19 +5129,19 @@ exports.caml_sys_is_directory = caml_sys_is_directory;
 exports.caml_sys_file_exists = caml_sys_file_exists;
 /* No side effect */
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ }),
-/* 27 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var Curry = __webpack_require__(1);
-var Caml_int32 = __webpack_require__(13);
-var Caml_int64 = __webpack_require__(28);
-var Caml_utils = __webpack_require__(14);
+var Caml_int32 = __webpack_require__(11);
+var Caml_int64 = __webpack_require__(24);
+var Caml_utils = __webpack_require__(12);
 var Caml_builtin_exceptions = __webpack_require__(0);
 
 function caml_failwith(s) {
@@ -6082,15 +5940,15 @@ exports.caml_nativeint_of_string = caml_nativeint_of_string;
 
 
 /***/ }),
-/* 28 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Caml_int32 = __webpack_require__(13);
-var Caml_utils = __webpack_require__(14);
-var Caml_primitive = __webpack_require__(11);
+var Caml_int32 = __webpack_require__(11);
+var Caml_utils = __webpack_require__(12);
+var Caml_primitive = __webpack_require__(9);
 var Caml_builtin_exceptions = __webpack_require__(0);
 
 var min_int = /* record */[
@@ -6734,7 +6592,7 @@ exports.get64 = get64;
 
 
 /***/ }),
-/* 29 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6933,7 +6791,7 @@ exports.get = get;
 
 
 /***/ }),
-/* 30 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6986,7 +6844,7 @@ exports.isCamlExceptionOrOpenVariant = isCamlExceptionOrOpenVariant;
 
 
 /***/ }),
-/* 31 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7000,13 +6858,13 @@ exports.not_implemented = not_implemented;
 
 
 /***/ }),
-/* 32 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Block = __webpack_require__(10);
+var Block = __webpack_require__(8);
 
 function erase_rel(param) {
   if (typeof param === "number") {
@@ -7235,6 +7093,193 @@ exports.concat_fmt = concat_fmt;
 
 
 /***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Curry = __webpack_require__(1);
+var NodeRe = __webpack_require__(13);
+var DomTypesRe = __webpack_require__(5);
+var Js_primitive = __webpack_require__(2);
+var ParentNodeRe = __webpack_require__(14);
+var EventTargetRe = __webpack_require__(6);
+var DocumentOrShadowRootRe = __webpack_require__(30);
+var NonElementParentNodeRe = __webpack_require__(31);
+
+function Impl() {
+  var asHtmlDocument = (
+    function (document) {
+      return document.doctype.name === "html" ?  document : null;
+    }
+  );
+  var asHtmlDocument$1 = function (self) {
+    return Js_primitive.null_to_opt(Curry._1(asHtmlDocument, self));
+  };
+  var ofNode = function (node) {
+    var match = +(NodeRe.nodeType(node) === /* Document */8);
+    if (match !== 0) {
+      return /* Some */[node];
+    } else {
+      return /* None */0;
+    }
+  };
+  var compatMode = function (self) {
+    return DomTypesRe.decodeCompatMode(self.compatMode);
+  };
+  var visibilityState = function (self) {
+    return DomTypesRe.decodeVisibilityState(self.visibilityState);
+  };
+  return /* module */[
+          /* asHtmlDocument */asHtmlDocument$1,
+          /* ofNode */ofNode,
+          /* compatMode */compatMode,
+          /* visibilityState */visibilityState
+        ];
+}
+
+var include = NodeRe.Impl(/* module */[]);
+
+EventTargetRe.Impl(/* module */[]);
+
+NonElementParentNodeRe.Impl(/* module */[]);
+
+DocumentOrShadowRootRe.Impl(/* module */[]);
+
+ParentNodeRe.Impl(/* module */[]);
+
+var asHtmlDocument = (
+    function (document) {
+      return document.doctype.name === "html" ?  document : null;
+    }
+  );
+
+function asHtmlDocument$1(self) {
+  return Js_primitive.null_to_opt(Curry._1(asHtmlDocument, self));
+}
+
+function ofNode(node) {
+  var match = +(NodeRe.nodeType(node) === /* Document */8);
+  if (match !== 0) {
+    return /* Some */[node];
+  } else {
+    return /* None */0;
+  }
+}
+
+function compatMode(self) {
+  return DomTypesRe.decodeCompatMode(self.compatMode);
+}
+
+function visibilityState(self) {
+  return DomTypesRe.decodeVisibilityState(self.visibilityState);
+}
+
+var nodeType = include[0];
+
+exports.Impl = Impl;
+exports.nodeType = nodeType;
+exports.asHtmlDocument = asHtmlDocument$1;
+exports.ofNode = ofNode;
+exports.compatMode = compatMode;
+exports.visibilityState = visibilityState;
+/* include Not a pure module */
+
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+
+function Impl() {
+  return /* module */[];
+}
+
+exports.Impl = Impl;
+/* No side effect */
+
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+
+function Impl() {
+  return /* module */[];
+}
+
+exports.Impl = Impl;
+/* No side effect */
+
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Generated by BUCKLESCRIPT VERSION 2.2.2, PLEASE EDIT WITH CARE
+
+
+var List = __webpack_require__(3);
+var ElementRe = __webpack_require__(33);
+var Canvas2dRe = __webpack_require__(37);
+var Js_primitive = __webpack_require__(2);
+var Ext$ReactSnake = __webpack_require__(15);
+var Cell$ReactSnake = __webpack_require__(7);
+var Food$ReactSnake = __webpack_require__(16);
+var Snake$ReactSnake = __webpack_require__(17);
+
+var canvasEl = Ext$ReactSnake.Option[/* unsafelyUnwrapOption */1](Js_primitive.null_undefined_to_opt(document.getElementById("snake-game")));
+
+var ctx = canvasEl.getContext("2d");
+
+var canvasWidth = Ext$ReactSnake.Option[/* unsafelyUnwrapOption */1](Ext$ReactSnake.Option[/* map */0]((function (prim) {
+            return prim.offsetWidth;
+          }), ElementRe.asHtmlElement(canvasEl)));
+
+var canvasHeight = Ext$ReactSnake.Option[/* unsafelyUnwrapOption */1](Ext$ReactSnake.Option[/* map */0]((function (prim) {
+            return prim.offsetHeight;
+          }), ElementRe.asHtmlElement(canvasEl)));
+
+function clearCanvas() {
+  ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+  return /* () */0;
+}
+
+function drawCell(fillColor, cell) {
+  Canvas2dRe.setFillStyle(ctx, /* String */0, fillColor);
+  Canvas2dRe.setStrokeStyle(ctx, /* String */0, "white");
+  ctx.fillRect(Cell$ReactSnake.x(cell) * 10, Cell$ReactSnake.y(cell) * 10, 10, 10);
+  ctx.strokeRect(Cell$ReactSnake.x(cell) * 10, Cell$ReactSnake.y(cell) * 10, 10, 10);
+  return /* () */0;
+}
+
+function drawSnakeCell(param) {
+  return drawCell("#1179BF", param);
+}
+
+function drawSnake(snake) {
+  return List.iter(drawSnakeCell, Snake$ReactSnake.body(snake));
+}
+
+function drawFood(food) {
+  return drawCell("#af2010", Food$ReactSnake.position(food));
+}
+
+exports.clearCanvas = clearCanvas;
+exports.drawSnake = drawSnake;
+exports.drawFood = drawFood;
+/* canvasEl Not a pure module */
+
+
+/***/ }),
 /* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7242,13 +7287,13 @@ exports.concat_fmt = concat_fmt;
 
 
 var Curry = __webpack_require__(1);
-var NodeRe = __webpack_require__(6);
-var DomTypesRe = __webpack_require__(3);
+var NodeRe = __webpack_require__(13);
+var DomTypesRe = __webpack_require__(5);
 var SlotableRe = __webpack_require__(34);
 var ChildNodeRe = __webpack_require__(35);
 var Js_primitive = __webpack_require__(2);
-var ParentNodeRe = __webpack_require__(7);
-var EventTargetRe = __webpack_require__(4);
+var ParentNodeRe = __webpack_require__(14);
+var EventTargetRe = __webpack_require__(6);
 var NonDocumentTypeChildNodeRe = __webpack_require__(36);
 
 function ofNode(node) {
@@ -7484,11 +7529,12 @@ exports.strokeStyle = strokeStyle;
 
 
 
-function create(snake, food, direction) {
+function create(snake, food, direction, keys) {
   return /* record */[
           /* snake */snake,
           /* food */food,
-          /* direction */direction
+          /* direction */direction,
+          /* keys */keys
         ];
 }
 
@@ -7504,10 +7550,77 @@ function direction(t) {
   return t[/* direction */2];
 }
 
+function keys(t) {
+  return t[/* keys */3];
+}
+
 exports.create = create;
 exports.snake = snake;
 exports.food = food;
 exports.direction = direction;
+exports.keys = keys;
+/* No side effect */
+
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Caml_exceptions = __webpack_require__(26);
+
+var $$Error = Caml_exceptions.create("Js_exn.Error");
+
+function internalToOCamlException(e) {
+  if (Caml_exceptions.isCamlExceptionOrOpenVariant(e)) {
+    return e;
+  } else {
+    return [
+            $$Error,
+            e
+          ];
+  }
+}
+
+function raiseError(str) {
+  throw new Error(str);
+}
+
+function raiseEvalError(str) {
+  throw new EvalError(str);
+}
+
+function raiseRangeError(str) {
+  throw new RangeError(str);
+}
+
+function raiseReferenceError(str) {
+  throw new ReferenceError(str);
+}
+
+function raiseSyntaxError(str) {
+  throw new SyntaxError(str);
+}
+
+function raiseTypeError(str) {
+  throw new TypeError(str);
+}
+
+function raiseUriError(str) {
+  throw new URIError(str);
+}
+
+exports.$$Error = $$Error;
+exports.internalToOCamlException = internalToOCamlException;
+exports.raiseError = raiseError;
+exports.raiseEvalError = raiseEvalError;
+exports.raiseRangeError = raiseRangeError;
+exports.raiseReferenceError = raiseReferenceError;
+exports.raiseSyntaxError = raiseSyntaxError;
+exports.raiseTypeError = raiseTypeError;
+exports.raiseUriError = raiseUriError;
 /* No side effect */
 
 
