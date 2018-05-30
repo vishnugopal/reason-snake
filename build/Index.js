@@ -4150,8 +4150,10 @@ exports.position = position;
 
 
 var List = __webpack_require__(3);
+var Caml_obj = __webpack_require__(20);
 var Pervasives = __webpack_require__(4);
 var Cell$ReactSnake = __webpack_require__(7);
+var Food$ReactSnake = __webpack_require__(16);
 
 function create(xs) {
   return List.map(Cell$ReactSnake.create, xs);
@@ -4240,12 +4242,24 @@ function move(snake, direction) {
   }
 }
 
+function resize(snake, food) {
+  var headCell = List.hd(snake);
+  if (Caml_obj.caml_equal(headCell, Food$ReactSnake.position(food))) {
+    console.log("Yup!");
+  }
+  return /* tuple */[
+          snake,
+          food
+        ];
+}
+
 function body(t) {
   return t;
 }
 
 exports.create = create;
 exports.move = move;
+exports.resize = resize;
 exports.body = body;
 /* No side effect */
 
@@ -4366,7 +4380,9 @@ function handleTick() {
     }
   }
   var newDirection = Direction$ReactSnake.findDirection(latestKey, World$ReactSnake.direction(oldWorld));
-  var newWorld = World$ReactSnake.create(Snake$ReactSnake.move(World$ReactSnake.snake(oldWorld), World$ReactSnake.direction(oldWorld)), World$ReactSnake.food(oldWorld), newDirection, newKeys);
+  var movedSnake = Snake$ReactSnake.move(World$ReactSnake.snake(oldWorld), World$ReactSnake.direction(oldWorld));
+  var match = Snake$ReactSnake.resize(movedSnake, World$ReactSnake.food(oldWorld));
+  var newWorld = World$ReactSnake.create(match[0], match[1], newDirection, newKeys);
   state[0] = newWorld;
   Draw$ReactSnake.clearCanvas(/* () */0);
   Draw$ReactSnake.drawSnake(World$ReactSnake.snake(state[0]));

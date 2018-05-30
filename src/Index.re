@@ -49,14 +49,18 @@ let handleTick = () => {
       ~key=latestKey,
       ~oldDirection=World.direction(oldWorld),
     );
+  let movedSnake =
+    Snake.move(
+      World.snake(oldWorld),
+      ~toDirection=World.direction(oldWorld),
+    );
+  let (newSnake, newFood) =
+    Snake.resize(~snake=movedSnake, ~food=World.food(oldWorld));
+
   let newWorld =
     World.create(
-      ~snake=
-        Snake.move(
-          World.snake(oldWorld),
-          ~toDirection=World.direction(oldWorld),
-        ),
-      ~food=World.food(oldWorld),
+      ~snake=newSnake,
+      ~food=newFood,
       ~direction=newDirection,
       ~keys=newKeys,
     );

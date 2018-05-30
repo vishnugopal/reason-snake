@@ -38,4 +38,12 @@ let move = (snake: t, ~toDirection as direction: Direction.t) : t => {
   };
 };
 
+let resize = (~snake: t, ~food: Food.t) => {
+  let headCell = List.hd(snake);
+  if (headCell == Food.position(food)) {
+    Js.log("Yup!");
+  };
+  (snake, food);
+};
+
 let body: t => list(Cell.t) = t => t;
