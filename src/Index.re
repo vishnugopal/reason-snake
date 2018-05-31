@@ -68,6 +68,7 @@ let handleTick = () => {
         Food.randomWithinBounds(
           ~maxHeight=Canvas.height(canvas),
           ~maxWidth=Canvas.width(canvas),
+          ~outsideCells=Snake.body(movedSnake),
         ),
       );
     } else {
