@@ -36,6 +36,8 @@ let getKey = evt =>
 
 let handleTick = () => {
   let oldWorld = state^;
+  let canvas = Canvas.create("snake-game");
+
   let latestKey =
     try (List.hd(World.keys(oldWorld))) {
     | Failure("hd") => Key.Ignored
@@ -44,19 +46,33 @@ let handleTick = () => {
     try (List.tl(World.keys(oldWorld))) {
     | Failure("tl") => World.keys(oldWorld)
     };
+
   let newDirection =
     Direction.findDirection(
       ~key=latestKey,
       ~oldDirection=World.direction(oldWorld),
     );
+
   let movedSnake =
     Snake.move(World.snake(oldWorld), ~direction=World.direction(oldWorld));
+
+  /*
+   Detect a snake colliding with food, when it does:
+   1. Lengthen the snake
+   2. Return a new food in a random position
+   */
   let (newSnake, newFood) =
-    Snake.resize(
-      movedSnake,
-      ~food=World.food(oldWorld),
-      ~direction=World.direction(oldWorld),
-    );
+    if (Snake.collidesWith(movedSnake, ~food=World.food(oldWorld))) {
+      (
+        Snake.lengthen(movedSnake, ~direction=newDirection),
+        Food.randomWithinBounds(
+          ~maxHeight=Canvas.height(canvas),
+          ~maxWidth=Canvas.width(canvas),
+        ),
+      );
+    } else {
+      (movedSnake, World.food(oldWorld));
+    };
 
   let newWorld =
     World.create(
@@ -67,7 +83,6 @@ let handleTick = () => {
     );
   state := newWorld;
 
-  let canvas = Canvas.create("snake-game");
   Canvas.clear(canvas);
   Canvas.drawSnake(canvas, World.snake(state^));
   Canvas.drawFood(canvas, World.food(state^));

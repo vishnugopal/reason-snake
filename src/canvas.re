@@ -36,24 +36,31 @@ let clear = t =>
        ~h=float_of_int(t.canvasHeight),
      );
 
+let cellWidth = 10;
+let cellHeight = 10;
+
 let drawCell = (t, fillColor, cell) => {
   Canvas2d.setFillStyle(t.ctx, String, fillColor);
   Canvas2d.setStrokeStyle(t.ctx, String, "white");
   Canvas2d.fillRect(
-    ~x=float(Cell.x(cell)) *. 10.,
-    ~y=float(Cell.y(cell)) *. 10.,
-    ~w=10.,
-    ~h=10.,
+    ~x=float(Cell.x(cell)) *. float_of_int(cellWidth),
+    ~y=float(Cell.y(cell)) *. float_of_int(cellHeight),
+    ~w=float_of_int(cellWidth),
+    ~h=float_of_int(cellHeight),
     t.ctx,
   );
   Canvas2d.strokeRect(
-    ~x=float(Cell.x(cell)) *. 10.,
-    ~y=float(Cell.y(cell)) *. 10.,
-    ~w=10.,
-    ~h=10.,
+    ~x=float(Cell.x(cell)) *. float_of_int(cellWidth),
+    ~y=float(Cell.y(cell)) *. float_of_int(cellHeight),
+    ~w=float_of_int(cellWidth),
+    ~h=float_of_int(cellHeight),
     t.ctx,
   );
 };
+
+let width = t => t.canvasWidth / cellWidth;
+
+let height = t => t.canvasHeight / cellHeight;
 
 let drawSnakeCell = t => drawCell(t, "#1179BF");
 

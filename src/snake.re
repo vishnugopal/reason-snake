@@ -42,13 +42,10 @@ let move = (~deleteLast=true, snake: t, ~direction: Direction.t) : t => {
   };
 };
 
-let resize = (snake: t, ~food: Food.t, ~direction: Direction.t) => {
-  let headCell = List.hd(snake);
-  if (headCell == Food.position(food)) {
-    (move(snake, ~direction, ~deleteLast=false), food);
-  } else {
-    (snake, food);
-  };
-};
+let collidesWith = (snake: t, ~food: Food.t) : bool =>
+  List.hd(snake) == Food.position(food);
+
+let lengthen = (snake: t, ~direction: Direction.t) : t =>
+  move(snake, ~direction, ~deleteLast=false);
 
 let body: t => list(Cell.t) = t => t;
