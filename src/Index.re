@@ -66,9 +66,11 @@ let handleTick = () => {
       ~keys=newKeys,
     );
   state := newWorld;
-  Draw.clearCanvas();
-  Draw.drawSnake(World.snake(state^));
-  Draw.drawFood(World.food(state^));
+
+  let canvas = Canvas.create("snake-game");
+  Canvas.clear(canvas);
+  Canvas.drawSnake(canvas, World.snake(state^));
+  Canvas.drawFood(canvas, World.food(state^));
 };
 
 Js.Global.setInterval(handleTick, 200);
