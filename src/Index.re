@@ -50,12 +50,13 @@ let handleTick = () => {
       ~oldDirection=World.direction(oldWorld),
     );
   let movedSnake =
-    Snake.move(
-      World.snake(oldWorld),
-      ~toDirection=World.direction(oldWorld),
-    );
+    Snake.move(World.snake(oldWorld), ~direction=World.direction(oldWorld));
   let (newSnake, newFood) =
-    Snake.resize(~snake=movedSnake, ~food=World.food(oldWorld));
+    Snake.resize(
+      movedSnake,
+      ~food=World.food(oldWorld),
+      ~direction=World.direction(oldWorld),
+    );
 
   let newWorld =
     World.create(

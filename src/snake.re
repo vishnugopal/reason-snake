@@ -11,12 +11,16 @@ let create = xs => List.map(Cell.create, xs);
  2. Insert a new cell at the beginning which has new coordinates according to the direction.
 
  */
-let move = (snake: t, ~toDirection as direction: Direction.t) : t => {
-  let rec deleteLast = (snake: t) : t =>
-    switch (snake) {
-    | [] => []
-    | [_] => []
-    | [first, ...tail] => [first] @ deleteLast(tail)
+let move = (~deleteLast=true, snake: t, ~direction: Direction.t) : t => {
+  let rec deleteLastCell = (snake: t) : t =>
+    if (deleteLast) {
+      switch (snake) {
+      | [] => []
+      | [_] => []
+      | [first, ...tail] => [first] @ deleteLastCell(tail)
+      };
+    } else {
+      snake;
     };
   let moveUpSingle = cell => Cell.create((Cell.x(cell), Cell.y(cell) - 1));
   let moveDownSingle = cell =>
@@ -28,22 +32,23 @@ let move = (snake: t, ~toDirection as direction: Direction.t) : t => {
   switch (snake, direction) {
   | ([], _) => []
   | ([head, ...tail], Direction.Up) =>
-    [moveUpSingle(head)] @ [head] @ deleteLast(tail)
+    [moveUpSingle(head)] @ [head] @ deleteLastCell(tail)
   | ([head, ...tail], Direction.Down) =>
-    [moveDownSingle(head)] @ [head] @ deleteLast(tail)
+    [moveDownSingle(head)] @ [head] @ deleteLastCell(tail)
   | ([head, ...tail], Direction.Left) =>
-    [moveLeftSingle(head)] @ [head] @ deleteLast(tail)
+    [moveLeftSingle(head)] @ [head] @ deleteLastCell(tail)
   | ([head, ...tail], Direction.Right) =>
-    [moveRightSingle(head)] @ [head] @ deleteLast(tail)
+    [moveRightSingle(head)] @ [head] @ deleteLastCell(tail)
   };
 };
 
-let resize = (~snake: t, ~food: Food.t) => {
+let resize = (snake: t, ~food: Food.t, ~direction: Direction.t) => {
   let headCell = List.hd(snake);
   if (headCell == Food.position(food)) {
-    Js.log("Yup!");
+    (move(snake, ~direction, ~deleteLast=false), food);
+  } else {
+    (snake, food);
   };
-  (snake, food);
 };
 
 let body: t => list(Cell.t) = t => t;

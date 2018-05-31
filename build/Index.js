@@ -4159,20 +4159,25 @@ function create(xs) {
   return List.map(Cell$ReactSnake.create, xs);
 }
 
-function move(snake, direction) {
-  var deleteLast = function (snake) {
-    if (snake) {
-      var tail = snake[1];
-      if (tail) {
-        return Pervasives.$at(/* :: */[
-                    snake[0],
-                    /* [] */0
-                  ], deleteLast(tail));
+function move($staropt$star, snake, direction) {
+  var deleteLast = $staropt$star ? $staropt$star[0] : /* true */1;
+  var deleteLastCell = function (snake) {
+    if (deleteLast) {
+      if (snake) {
+        var tail = snake[1];
+        if (tail) {
+          return Pervasives.$at(/* :: */[
+                      snake[0],
+                      /* [] */0
+                    ], deleteLastCell(tail));
+        } else {
+          return /* [] */0;
+        }
       } else {
         return /* [] */0;
       }
     } else {
-      return /* [] */0;
+      return snake;
     }
   };
   var moveUpSingle = function (cell) {
@@ -4210,7 +4215,7 @@ function move(snake, direction) {
                     ], Pervasives.$at(/* :: */[
                           head,
                           /* [] */0
-                        ], deleteLast(tail)));
+                        ], deleteLastCell(tail)));
       case 1 : 
           return Pervasives.$at(/* :: */[
                       moveDownSingle(head),
@@ -4218,7 +4223,7 @@ function move(snake, direction) {
                     ], Pervasives.$at(/* :: */[
                           head,
                           /* [] */0
-                        ], deleteLast(tail)));
+                        ], deleteLastCell(tail)));
       case 2 : 
           return Pervasives.$at(/* :: */[
                       moveLeftSingle(head),
@@ -4226,7 +4231,7 @@ function move(snake, direction) {
                     ], Pervasives.$at(/* :: */[
                           head,
                           /* [] */0
-                        ], deleteLast(tail)));
+                        ], deleteLastCell(tail)));
       case 3 : 
           return Pervasives.$at(/* :: */[
                       moveRightSingle(head),
@@ -4234,7 +4239,7 @@ function move(snake, direction) {
                     ], Pervasives.$at(/* :: */[
                           head,
                           /* [] */0
-                        ], deleteLast(tail)));
+                        ], deleteLastCell(tail)));
       
     }
   } else {
@@ -4242,15 +4247,19 @@ function move(snake, direction) {
   }
 }
 
-function resize(snake, food) {
+function resize(snake, food, direction) {
   var headCell = List.hd(snake);
   if (Caml_obj.caml_equal(headCell, Food$ReactSnake.position(food))) {
-    console.log("Yup!");
+    return /* tuple */[
+            move(/* Some */[/* false */0], snake, direction),
+            food
+          ];
+  } else {
+    return /* tuple */[
+            snake,
+            food
+          ];
   }
-  return /* tuple */[
-          snake,
-          food
-        ];
 }
 
 function body(t) {
@@ -4380,8 +4389,8 @@ function handleTick() {
     }
   }
   var newDirection = Direction$ReactSnake.findDirection(latestKey, World$ReactSnake.direction(oldWorld));
-  var movedSnake = Snake$ReactSnake.move(World$ReactSnake.snake(oldWorld), World$ReactSnake.direction(oldWorld));
-  var match = Snake$ReactSnake.resize(movedSnake, World$ReactSnake.food(oldWorld));
+  var movedSnake = Snake$ReactSnake.move(/* None */0, World$ReactSnake.snake(oldWorld), World$ReactSnake.direction(oldWorld));
+  var match = Snake$ReactSnake.resize(movedSnake, World$ReactSnake.food(oldWorld), World$ReactSnake.direction(oldWorld));
   var newWorld = World$ReactSnake.create(match[0], match[1], newDirection, newKeys);
   state[0] = newWorld;
   Draw$ReactSnake.clearCanvas(/* () */0);
