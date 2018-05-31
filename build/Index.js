@@ -4274,7 +4274,7 @@ function move($staropt$star, snake, direction) {
   }
 }
 
-function collidesWith(snake, food) {
+function findsFood(snake, food) {
   return Caml_obj.caml_equal(List.hd(snake), Food$ReactSnake.position(food));
 }
 
@@ -4288,7 +4288,7 @@ function body(t) {
 
 exports.create = create;
 exports.move = move;
-exports.collidesWith = collidesWith;
+exports.findsFood = findsFood;
 exports.lengthen = lengthen;
 exports.body = body;
 /* No side effect */
@@ -4412,7 +4412,7 @@ function handleTick() {
   }
   var newDirection = Direction$ReactSnake.findDirection(latestKey, World$ReactSnake.direction(oldWorld));
   var movedSnake = Snake$ReactSnake.move(/* None */0, World$ReactSnake.snake(oldWorld), World$ReactSnake.direction(oldWorld));
-  var match = Snake$ReactSnake.collidesWith(movedSnake, World$ReactSnake.food(oldWorld)) ? /* tuple */[
+  var match = Snake$ReactSnake.findsFood(movedSnake, World$ReactSnake.food(oldWorld)) ? /* tuple */[
       Snake$ReactSnake.lengthen(movedSnake, newDirection),
       Food$ReactSnake.randomWithinBounds(Canvas$ReactSnake.width(canvas), Canvas$ReactSnake.height(canvas), Snake$ReactSnake.body(movedSnake))
     ] : /* tuple */[

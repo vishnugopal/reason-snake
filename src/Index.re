@@ -62,7 +62,7 @@ let handleTick = () => {
    2. Return a new food in a random position
    */
   let (newSnake, newFood) =
-    if (Snake.collidesWith(movedSnake, ~food=World.food(oldWorld))) {
+    if (Snake.findsFood(movedSnake, ~food=World.food(oldWorld))) {
       (
         Snake.lengthen(movedSnake, ~direction=newDirection),
         Food.randomWithinBounds(

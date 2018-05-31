@@ -42,7 +42,7 @@ let move = (~deleteLast=true, snake: t, ~direction: Direction.t) : t => {
   };
 };
 
-let collidesWith = (snake: t, ~food: Food.t) : bool =>
+let findsFood = (snake: t, ~food: Food.t) : bool =>
   List.hd(snake) == Food.position(food);
 
 let lengthen = (snake: t, ~direction: Direction.t) : t =>
