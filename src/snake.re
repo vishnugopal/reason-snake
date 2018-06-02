@@ -56,4 +56,14 @@ let rec bitesTail = (snake: t) : bool =>
   | [hd, ...tl] => List.exists(el => el == hd, tl) || bitesTail(tl)
   };
 
+let crashesIntoWall = (snake: t, ~maxHeight: int, ~maxWidth: int) : bool => {
+  let headCell = List.hd(snake);
+  Cell.x(headCell) < 1
+  || Cell.x(headCell) >= maxWidth
+  - 1
+  || Cell.y(headCell) < 1
+  || Cell.y(headCell) >= maxHeight
+  - 1;
+};
+
 let body: t => list(Cell.t) = t => t;

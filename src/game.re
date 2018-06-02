@@ -57,8 +57,15 @@ let reset = (game: t) => {
 
 let isGameOver = (game: t) => {
   let world = world(game);
+  let snake = World.snake(world);
 
-  World.isGameOver(world) || Snake.bitesTail(World.snake(world));
+  World.isGameOver(world)
+  || Snake.bitesTail(snake)
+  || Snake.crashesIntoWall(
+       snake,
+       ~maxHeight=Canvas.height(canvas(game)),
+       ~maxWidth=Canvas.width(canvas(game)),
+     );
 };
 
 let processKeys = (game: t) : (list(Key.t), Direction.t) => {
