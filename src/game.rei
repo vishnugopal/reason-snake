@@ -1,6 +1,6 @@
 type t;
 
-let create: unit => t;
+let create: (~drawingCanvasElement: string, ~scorerElement: string) => t;
 let reset: t => unit;
 
 let world: t => World.t;

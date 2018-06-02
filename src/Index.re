@@ -16,7 +16,8 @@ let getKey = evt =>
   | _ => Ignored
   };
 
-let snakeGame = Game.create();
+let snakeGame =
+  Game.create(~drawingCanvasElement="snake-game", ~scorerElement="scorer");
 
 let handleTick = () =>
   if (Game.isGameOver(snakeGame)) {
@@ -35,6 +36,7 @@ let handleEvent = evt => {
       ~food=World.food(oldWorld),
       ~direction=World.direction(oldWorld),
       ~keys=newKeys,
+      ~foodAte=World.foodAte(oldWorld),
       ~gameOver=World.isGameOver(oldWorld),
     );
   Game.setWorld(snakeGame, newWorld);
