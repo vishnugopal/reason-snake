@@ -1,10 +1,4 @@
 open Webapi.Dom;
-let documentEventTarget =
-  document
-  |> Document.asHtmlDocument
-  |> Ext.Option.andThen(HtmlDocument.body)
-  |> Ext.Option.unsafelyUnwrapOption
-  |> Element.asEventTarget;
 
 let snakeGame =
   Game.create(~drawingCanvasElement="snake-game", ~scorerElement="scorer");
@@ -18,6 +12,13 @@ let handleTick = () =>
   };
 
 let handleKey = evt => Game.processKey(snakeGame, ~key=Key.ofEvent(evt));
+
+let documentEventTarget =
+  document
+  |> Document.asHtmlDocument
+  |> Ext.Option.andThen(HtmlDocument.body)
+  |> Ext.Option.unsafelyUnwrapOption
+  |> Element.asEventTarget;
 
 Js.Global.setInterval(handleTick, 200);
 
