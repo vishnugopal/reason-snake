@@ -6,7 +6,7 @@
     "start": "bsb -make-world -w",
     "clean": "bsb -clean-world",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "webpack -w"
+    "webpack": "webpack --mode=development -w"
   },
   "keywords": [
     "BuckleScript"
@@ -14,10 +14,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "bs-webapi": "^0.9.1"
+    "bs-webapi": ">=0.9.1"
   },
   "devDependencies": {
-    "bs-platform": "^2.2.2",
-    "webpack": "^3.8.1"
+    "bs-platform": "^3.1.5",
+    "webpack": "^4.10.2",
+    "webpack-cli": "^2.1.4"
   }
 }

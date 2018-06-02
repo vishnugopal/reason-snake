@@ -2,16 +2,15 @@ type t = list(Cell.t);
 
 let create = xs => List.map(Cell.create, xs);
 
-/*
+/**
 
  Move a snake.
 
  Steps:
  1. Delete last cell.
  2. Insert a new cell at the beginning which has new coordinates according to the direction.
-
  */
-let move = (~deleteLast=true, snake: t, ~direction: Direction.t) : t => {
+let move_ = (snake: t, ~direction: Direction.t, ~deleteLast: bool) : t => {
   let rec deleteLastCell = (snake: t) : t =>
     if (deleteLast) {
       switch (snake) {
@@ -42,10 +41,19 @@ let move = (~deleteLast=true, snake: t, ~direction: Direction.t) : t => {
   };
 };
 
+let move = (snake: t, ~direction: Direction.t) : t =>
+  snake |. move_(~direction, ~deleteLast=true);
+
 let findsFood = (snake: t, ~food: Food.t) : bool =>
   List.hd(snake) == Food.position(food);
 
 let lengthen = (snake: t, ~direction: Direction.t) : t =>
-  move(snake, ~direction, ~deleteLast=false);
+  move_(snake, ~direction, ~deleteLast=false);
+
+let rec bitesTail = (snake: t) : bool =>
+  switch (snake) {
+  | [] => false
+  | [hd, ...tl] => List.exists(el => el == hd, tl) || bitesTail(tl)
+  };
 
 let body: t => list(Cell.t) = t => t;
