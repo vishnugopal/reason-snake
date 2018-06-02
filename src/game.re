@@ -141,7 +141,7 @@ let processSnakeEatingFood =
   (newSnake, newFood, newFoodAte);
 };
 
-let setScore = (game: t) =>
+let drawScore = (game: t) =>
   Scorer.update(
     game.scorer,
     game.scoreMultiplier * World.foodAte(world(game)),
@@ -181,7 +181,7 @@ let processKey = (snakeGame: t, ~key: Key.t) => {
  * 3. Checks if game is over (snake has bitten its tail)
  * 4. Checks if snake has eaten a food, if so makes a longer snake & a new food
  * 5. Sets a new game world based on previous conditions.
- * 6. Sets a score based on food eaten.
+ * 6. Draws a score based on food eaten.
  * 7. and finally, draws the game world to canvas.
  */
 let doTick = (snakeGame: t) => {
@@ -208,6 +208,6 @@ let doTick = (snakeGame: t) => {
     );
   setWorld(snakeGame, newWorld);
 
-  setScore(snakeGame);
+  drawScore(snakeGame);
   drawCanvas(snakeGame);
 };
