@@ -7,4 +7,5 @@ let world: t => World.t;
 let setWorld: (t, World.t) => unit;
 
 let isGameOver: t => bool;
-let runTick: t => unit;
+let doTick: t => unit;
+let processKey: (t, ~key: Key.t) => unit;

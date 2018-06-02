@@ -154,6 +154,27 @@ let drawCanvas = (game: t) => {
 };
 
 /**
+ * Process key input.
+ * To account for very fast key presses, we maintain
+ * a key queue inside the game world, and process the keys
+ * only on doTick
+ */
+let processKey = (snakeGame: t, ~key: Key.t) => {
+  let oldWorld = world(snakeGame);
+  let newKeys = World.keys(oldWorld) @ [key];
+  let newWorld =
+    World.create(
+      ~snake=World.snake(oldWorld),
+      ~food=World.food(oldWorld),
+      ~direction=World.direction(oldWorld),
+      ~keys=newKeys,
+      ~foodAte=World.foodAte(oldWorld),
+      ~gameOver=World.isGameOver(oldWorld),
+    );
+  setWorld(snakeGame, newWorld);
+};
+
+/**
  * Responsible for updating the game world state on each tick:
  * 1. Processes keys
  * 2. Moves the snake in the current direction.
@@ -163,7 +184,7 @@ let drawCanvas = (game: t) => {
  * 6. Sets a score based on food eaten.
  * 7. and finally, draws the game world to canvas.
  */
-let runTick = (snakeGame: t) => {
+let doTick = (snakeGame: t) => {
   let (newKeys, newDirection) = processKeys(snakeGame);
   let movedSnake = moveSnake(snakeGame);
   let newGameOver = isGameOver(snakeGame);
