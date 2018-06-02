@@ -25,8 +25,8 @@ let create = () => {
       ~keys=initialKeys,
       ~gameOver=initialGameOver,
     );
-
   let drawingCanvas = Canvas.create("snake-game");
+
   {
     state: ref(initialWorld),
     initialSnake,
